@@ -39,7 +39,9 @@ IN.list=()=>[...IN.devices.values()].filter(d=>d.connected);
 IN.device=id=>IN.devices.get(id)||null;
 function padStyle(id){const s=String(id).toLowerCase();if(/xbox|xinput|045e|microsoft/.test(s))return'xbox';if(/054c|sony|playstation|dualshock|dualsense|^wireless controller/.test(s))return'ps';return'generic';}
 IN.styleOf=d=>{if(IN.cfg.glyphs!=='auto')return IN.cfg.glyphs;return d&&d.style||'xbox';};
-IN.glyph=(d,action)=>{if(!d)return'';if(d.kind==='keyboard'){const k=(d.secondary?IN.cfg.keys2:IN.cfg.keys)[action];return k&&k[0]?IN.KEYNAME(k[0]):'—';}if(d.kind==='remote')return({pass:'PASSE',shoot:'CHUTE',cross:'CRUZ.',through:'PROF.',sprint:'SPRINT',switch:'TROCA',skill:'HAB.',tackle:'MARCA',pause:'PAUSA'})[action]||action;const b=IN.cfg.pad[action];return b&&b.length?IN.GLYPH[IN.styleOf(d)][b[0]]||('B'+b[0]):'—';};
+/* nomes dos botões do celular, iguais aos do controle (trs-mobile-device-management, controller.js: LABELS no ataque) */
+IN.REMOTE_NAMES={pass:'PASSE',shoot:'CHUTAR',cross:'CRUZAR',through:'ENFIADA',sprint:'CORRER',switch:'TROCAR',skill:'DRIBLE',tackle:'MARCAR',support:'CHAMAR',pause:'PAUSA',up:'ANALÓGICO',down:'ANALÓGICO',left:'ANALÓGICO',right:'ANALÓGICO'};
+IN.glyph=(d,action)=>{if(!d)return'';if(d.kind==='keyboard'){const k=(d.secondary?IN.cfg.keys2:IN.cfg.keys)[action];return k&&k[0]?IN.KEYNAME(k[0]):'—';}if(d.kind==='remote')return IN.REMOTE_NAMES[action]||action;const b=IN.cfg.pad[action];return b&&b.length?IN.GLYPH[IN.styleOf(d)][b[0]]||('B'+b[0]):'—';};
 if(typeof window!=='undefined'){
  window.addEventListener('gamepadconnected',e=>{const g=e.gamepad;const id='gp'+g.index;const old=IN.devices.get(id);if(old&&old.connected)return;const n=[...IN.devices.values()].filter(d=>d.kind==='gamepad').length;
   addDevice({id,kind:'gamepad',index:g.index,label:'CONTROLE '+(g.index+1),short:'CONTROLE '+(g.index+1),icon:'🎮',style:padStyle(g.id),name:g.id,mapping:g.mapping});});

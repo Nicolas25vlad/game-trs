@@ -26,5 +26,7 @@ IN.poll();ok(!dev().state.cross&&!dev().state.switch,'e soltam no quadro seguint
 /* sem pacote recente: zera (o celular não pode continuar andando sozinho), inclusive toques pendentes */
 IN.remoteUpdate('rc-a','CELULAR 1',pkt({x:1,through:true}));IN.remoteUpdate('rc-a','CELULAR 1',pkt({x:1}));now+=900;IN.poll();
 ok(dev().state.mx===0&&!dev().state.through,'sem pacote há 800 ms o comando é zerado (inclusive toque pendente)');
+const g=a=>IN.glyph(dev(),a);ok(g('through')==='ENFIADA'&&g('cross')==='CRUZAR'&&g('shoot')==='CHUTAR'&&g('skill')==='DRIBLE'&&g('sprint')==='CORRER','nomes dos botões do celular iguais aos do controle (sem abreviações como PROF.)');
+ok(g('up')==='ANALÓGICO'&&g('support')==='CHAMAR','direções e apoio também têm nome');
 IN.remoteGone('rc-a');ok(!dev().connected,'celular desconectado sai da lista');
 console.log(`INPUT TEST PASS (${checks} verificações)`);
