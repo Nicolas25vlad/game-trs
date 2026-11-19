@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Controle no celular (QR code, PIN, conexão)
+    url: https://github.com/Traficas-Revolution-Soccer/trs-mobile-device-management/issues
+    about: Problemas com o celular como controle vão para o repo trs-mobile-device-management.

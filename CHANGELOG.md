@@ -1,13 +1,21 @@
-# MATCHDAY — Lista de alterações
+# Changelog
 
-## Não lançado — controle no celular separado
+Todas as mudanças relevantes do jogo ficam aqui.
+O formato segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e o projeto usa [Versionamento Semântico](https://semver.org/lang/pt-BR/) a partir da 0.7.0.
+
+## [Não lançado]
+
+## [0.7.0] - 2026-11-19 — Controle no celular separado
+
+O controle no celular virou um repositório próprio, lançado junto na mesma versão: [trs-mobile-device-management v0.7.0](https://github.com/Traficas-Revolution-Soccer/trs-mobile-device-management/releases/tag/v0.7.0).
 
 - **Controle no celular mudou de repo:** a página do celular (`controller/`), o servidor de pareamento (`server/server.js`), o cliente do jogo (`js/input/remote.js`) e o teste do servidor agora vivem em [trs-mobile-device-management](https://github.com/Traficas-Revolution-Soccer/trs-mobile-device-management). O jogo carrega `mobile/qr.js` e `mobile/remote.js`, servidos por lá. Para jogar com o celular: `node server/server.js --game ../game-trs` dentro daquele repo.
 - **QR code** na tela Controle virtual: o celular lê o código e já entra com o PIN, sem digitar. Com várias redes no PC, dá para escolher qual endereço vai no QR.
 - **Toque curto no celular não se perde:** `js/input/input.js` guarda os botões vistos apertados entre duas leituras, como o teclado já fazia. Antes, apertar e soltar entre dois quadros (pacotes agrupados pelo Wi-Fi) sumia. Teste novo: `tests/input.test.cjs`.
-- `tools/build_standalone.py` deixa os scripts de `mobile/` fora do HTML offline.
+- `tools/build_standalone.py` deixa os scripts de `mobile/` fora do HTML offline, que agora se chama `TRS26_OFFLINE.html`.
+- **Repositório organizado:** README completo, `package.json` com `npm test` e `npm run test:rapido`, integração contínua, HTML offline anexado a cada release, modelos de issue e pull request, guias de contribuição e de segurança. O relatório de testes foi para `docs/LIMITACOES_E_TESTES.md`.
 
-## 0.6 — TRS26 · Complete Football Experience (esta versão)
+## [0.6.0] - 2026-11-18 — TRS26 · Complete Football Experience
 
 ### Mundo jogável (novo núcleo)
 - `js/football/world.js`: simulação única e autoritativa, passo fixo de 1/60 s, interpolação na renderização, RNG com semente (sem `Math.random` no mundo) e resultados reproduzíveis.
@@ -83,8 +91,7 @@
 ### Arquivo único
 - `tools/build_standalone.py` gera `TRS26_v0.6_OFFLINE.html` com CSS, scripts e imagens embutidos.
 
-
-## 0.5 — Germinare & World Cup Update
+## [0.5.0] — Germinare & World Cup Update
 
 ### Ritmo da partida (P1)
 - **Relógio contextual** (`js/pacing.js`): entre os lances corre acelerado, perto de um lance desacelera de forma contínua até 1x e, durante o lance, segue a trilha 3D. O instante decisivo coincide com o minuto calculado pelo motor, sem saltos e sem contagem dupla.
@@ -127,7 +134,7 @@
 - **Gol de ouro:** com prorrogação também ligada, o gol de ouro não era criado. Corrigido.
 - **Mata-mata:** um jogo sem a opção explícita de pênaltis podia terminar empatado. Agora todo mata-mata termina com vencedor decidido em campo.
 
-## 0.4
+## [0.4.0]
 
 ### Bugs da 0.3 corrigidos
 - **Falta dentro da área sem consequência:** agora toda infração direta da defesa dentro da própria área vira pênalti, com sequência completa: apito, árbitro apontando a marca, reclamações, cena da cobrança, goleiro, desfecho e rebote. Antes, a "falta" era só uma animação sem regra.
@@ -197,3 +204,7 @@
 - **Criados:** `js/util.js`, `js/data.js`, `js/rules.js`, `js/engine.js`, `js/choreo.js`, `js/audio.js`, todo o `js/gfx/` e `js/ui/`, `tests/*.cjs`, `tests/e2e_test.py`, `tools/build_standalone.py`, `docs/*.png`, `CHANGELOG.md`.
 - **Reescritos:** `index.html`, `styles.css`, `README.md`; `kit.js` foi movido para `js/kit.js` e expandido; `renderer.js` e `webgl.js` foram substituídos por `js/gfx/renderer2d.js` e `js/gfx/renderer3d.js`. `app.js` foi dividido em `js/ui/*`.
 - **Removidos:** testes da 0.3 (`tests/webgl_mock.test.cjs` e `tests/live_flow_test.py`), substituídos pelos novos, e as capturas da 0.3.
+
+[Não lançado]: https://github.com/Traficas-Revolution-Soccer/game-trs/compare/v0.7.0...HEAD
+[0.7.0]: https://github.com/Traficas-Revolution-Soccer/game-trs/compare/v0.6.0...v0.7.0
+[0.6.0]: https://github.com/Traficas-Revolution-Soccer/game-trs/releases/tag/v0.6.0

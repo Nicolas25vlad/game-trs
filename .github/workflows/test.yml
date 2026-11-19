@@ -1,0 +1,40 @@
+name: Testes
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [22, 24]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Verificar sintaxe
+        run: find js data tools tests -name '*.js' -o -name '*.cjs' | xargs -n1 node --check
+      - name: Testes
+        run: npm test
+
+  offline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Gerar HTML offline
+        run: python tools/build_standalone.py TRS26_OFFLINE.html
+      - uses: actions/upload-artifact@v4
+        with:
+          name: TRS26_OFFLINE
+          path: TRS26_OFFLINE.html
+          retention-days: 14

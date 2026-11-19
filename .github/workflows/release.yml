@@ -1,0 +1,24 @@
+name: Release
+
+# Ao publicar uma release no GitHub, anexa o jogo em um único HTML offline.
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  offline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Gerar HTML offline
+        run: python tools/build_standalone.py "TRS26_${{ github.event.release.tag_name }}_OFFLINE.html"
+      - name: Anexar à release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload "${{ github.event.release.tag_name }}" TRS26_*_OFFLINE.html --clobber
