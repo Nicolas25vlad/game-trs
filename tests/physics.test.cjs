@@ -2,7 +2,7 @@
 /* Física do mundo contínuo, isolada: bola (queda, rolagem, efeito, trave, travessão, linha do gol) e corpos dos atletas.
    Cada caso monta a situação à mão e chama só o pedaço da física envolvido, sem IA nem árbitro no meio. */
 const assert=require('node:assert/strict');
-const FILES=['js/util.js','js/modes.js','js/data.js','data/catalog_br_2026.js','js/catalog.js','js/rules.js','js/germinare.js','js/tournament.js','js/football/world.js','js/football/ai.js'];
+const FILES=['js/util.js','js/modes.js','js/data.js','data/catalog_br_2026.js','js/catalog.js','js/rules.js','js/germinare.js','js/tournament.js','js/football/world.js','js/football/physics.js','js/football/actions.js','js/football/referee.js','js/football/restarts.js','js/football/ai.js'];
 const MD=require('./load.cjs')(FILES,{window:true});
 const {clubs}=MD.Catalog.load();const W=MD.World,PHYS=W.PHYS,DT=W.DT,BR=W.BALL_R;
 const H=clubs.find(c=>c.id==='br-flamengo'),A=clubs.find(c=>c.id==='br-corinthians');

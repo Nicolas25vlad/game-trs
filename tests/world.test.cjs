@@ -2,7 +2,7 @@
 /* TRS26 / MATCHDAY 0.6 — testes do mundo contínuo jogável (sem navegador).
    Um "humano" envia os mesmos comandos lógicos que o teclado/controle enviariam (MOVE, PASS, SHOOT, SWITCH, TACKLE...). */
 const assert=require('node:assert/strict');
-const FILES=['js/util.js','js/modes.js','js/data.js','data/catalog_br_2026.js','js/catalog.js','js/rules.js','js/germinare.js','js/tournament.js','js/football/world.js','js/football/ai.js'];
+const FILES=['js/util.js','js/modes.js','js/data.js','data/catalog_br_2026.js','js/catalog.js','js/rules.js','js/germinare.js','js/tournament.js','js/football/world.js','js/football/physics.js','js/football/actions.js','js/football/referee.js','js/football/restarts.js','js/football/ai.js'];
 const MD=require('./load.cjs')(FILES,{window:true});
 const {clubs}=MD.Catalog.load();const W=MD.World;const H=clubs.find(c=>c.id==='br-flamengo'),A=clubs.find(c=>c.id==='br-corinthians');
 let checks=0;const ok=(c,msg)=>{assert.ok(c,msg);checks++;console.log('  ✓ '+msg);};
