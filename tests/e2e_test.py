@@ -234,7 +234,8 @@ def main():
     ctx.close()
     print('B. Servidor local + dois celulares (multitoque):')
     port = 18900 + random.randint(0, 80)
-    srv = subprocess.Popen([sys.executable.replace('python3', 'node') if False else 'node', str(ROOT / 'server' / 'server.js'), str(port)], env={**os.environ, 'TRS_QUIET': '1'}, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    mobile = pathlib.Path(os.environ.get('TRS_MOBILE_DIR') or ROOT.parent / 'trs-mobile-device-management')  # servidor e controle vivem nesse repo
+    srv = subprocess.Popen(['node', str(mobile / 'server' / 'server.js'), str(port), '--game', str(ROOT)], env={**os.environ, 'TRS_QUIET': '1'}, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     try:
         time.sleep(1.2)
         host = b.new_context(viewport={'width': 1366, 'height': 768}); hp = host.new_page(); herr = []; hp.on('pageerror', lambda e: herr.append(str(e)))

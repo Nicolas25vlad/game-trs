@@ -1,5 +1,12 @@
 # MATCHDAY — Lista de alterações
 
+## Não lançado — controle no celular separado
+
+- **Controle no celular mudou de repo:** a página do celular (`controller/`), o servidor de pareamento (`server/server.js`), o cliente do jogo (`js/input/remote.js`) e o teste do servidor agora vivem em [trs-mobile-device-management](https://github.com/Traficas-Revolution-Soccer/trs-mobile-device-management). O jogo carrega `mobile/qr.js` e `mobile/remote.js`, servidos por lá. Para jogar com o celular: `node server/server.js --game ../game-trs` dentro daquele repo.
+- **QR code** na tela Controle virtual: o celular lê o código e já entra com o PIN, sem digitar. Com várias redes no PC, dá para escolher qual endereço vai no QR.
+- **Toque curto no celular não se perde:** `js/input/input.js` guarda os botões vistos apertados entre duas leituras, como o teclado já fazia. Antes, apertar e soltar entre dois quadros (pacotes agrupados pelo Wi-Fi) sumia. Teste novo: `tests/input.test.cjs`.
+- `tools/build_standalone.py` deixa os scripts de `mobile/` fora do HTML offline.
+
 ## 0.6 — TRS26 · Complete Football Experience (esta versão)
 
 ### Mundo jogável (novo núcleo)

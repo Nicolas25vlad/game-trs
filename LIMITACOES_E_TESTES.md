@@ -16,7 +16,8 @@ Data dos testes: 18/11/2026.
 | Conjunto | Verificações | O que cobre |
 |---|---|---|
 | `world.test.cjs` | 39 | Mundo jogável sem navegador, com um "humano" enviando os mesmos comandos do teclado/controle: humano cobra a saída; passe chega a companheiro e o controle troca sozinho; movimento, diagonal, sprint, inércia, frenagem; TROCAR; chutes que às vezes viram gol e às vezes não; desarmes e recuperação de posse; lateral, escanteio, tiro de meta, gol só com a bola inteira além da linha, impedimento no momento do passe, pênalti, 2º amarelo → vermelho; intervalo e fim com duração real; determinismo por semente; replay sem avançar a partida; Germinare 5x5; disputa de pênaltis com mergulho do goleiro humano; dificuldade Iniciante × Lendária |
-| `server.test.cjs` | 27 | **Servidor real** (processo Node + WebSocket de verdade): serve jogo e controle, protege o código do servidor e bloqueia travessia de diretório; PIN de 6 dígitos com expiração real; bloqueio após 5 PINs errados; nenhum comando antes da autorização; token; joystick + botões simultâneos; pacotes antigos/inválidos descartados; limite de frequência; dois celulares independentes; queda informada; reconexão com token (token falso recusado); encerramento de sessão |
+| `input.test.cjs` | 10 | Celular como dispositivo de entrada: toque curto entre dois quadros não se perde; segurar/soltar; dois toques no mesmo quadro; comando zerado sem pacote recente |
+| `server.test.cjs` | 27 | *(mudou para o repo trs-mobile-device-management)* **Servidor real** (processo Node + WebSocket de verdade): serve jogo e controle, protege o código do servidor e bloqueia travessia de diretório; PIN de 6 dígitos com expiração real; bloqueio após 5 PINs errados; nenhum comando antes da autorização; token; joystick + botões simultâneos; pacotes antigos/inválidos descartados; limite de frequência; dois celulares independentes; queda informada; reconexão com token (token falso recusado); encerramento de sessão |
 | `rules.test.cjs` | 34 | Regras e relógio do motor estatístico (usado em SIMULAR) |
 | `choreo.test.cjs` | ~1.000 lances | Coreografia dos lances do motor anterior (ainda usada pelos destaques simulados) |
 | `montecarlo.test.cjs` | 600 partidas | Equilíbrio do motor estatístico |
@@ -160,7 +161,6 @@ O acerto de passes (55–72%) está **abaixo** do futebol real (~80%), e há imp
 ### Não implementado
 - **Modo Carreira e Modo História:** marcados "EM BREVE" no menu.
 - **Conexão de celular pela internet** (WebRTC ou servidor de sinalização).
-- **QR code** para abrir o controle no celular: o endereço é mostrado em texto.
 - **Estádios reais, rostos reais, escudos e uniformes oficiais:** não usados, por direitos.
 
 ---
@@ -240,6 +240,6 @@ O acerto de passes (55–72%) está **abaixo** do futebol real (~80%), e há imp
 1. Testar em GPU real e em celulares e controles físicos; medir FPS com o diagnóstico e ajustar a qualidade.
 2. Pesquisar e cadastrar os elencos 2026 das ligas internacionais, com fontes.
 3. Calibrar a IA: acerto de passes e impedimentos.
-4. Adicionar QR code e, se desejado, conexão pela internet (WebRTC com servidor de sinalização).
+4. Conexão do celular pela internet (WebRTC com servidor de sinalização), no repo trs-mobile-device-management. O QR code já foi feito.
 5. Ampliar reações por personalidade e animações de transição.
 6. Implementar o Modo Carreira e o Modo História.

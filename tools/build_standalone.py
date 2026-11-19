@@ -1,7 +1,7 @@
 """Gera TRS26_v0.6_OFFLINE.html: um único arquivo com CSS, todos os scripts e as imagens do TRS26 embutidos
 (data: URI). Abre direto com duplo clique, sem servidor e sem internet.
-Limitação por desenho: o controle virtual no celular precisa do servidor local (node server/server.js) e de um
-endereço http://; no arquivo único ele mostra a instrução para iniciar o servidor.
+Limitação por desenho: o controle virtual no celular precisa do servidor do repo trs-mobile-device-management e de um
+endereço http://; no arquivo único os scripts de mobile/ ficam de fora e a tela mostra a instrução para iniciar o servidor.
 Uso: python3 tools/build_standalone.py [saida.html]"""
 import base64, re, sys, pathlib
 ROOT = pathlib.Path(__file__).resolve().parents[1]
@@ -26,6 +26,7 @@ def inline(m):
     js = embed_assets((ROOT / src).read_text(encoding='utf-8'))
     js = re.sub(r'</(script)', r'<\\/\1', js, flags=re.I)
     return f'<script>/* {src} */\n{js}\n</script>'
+html = re.sub(r'<script src="mobile/[^"]+"></script>\n?', '', html)  # servidos pelo trs-mobile-device-management
 html = re.sub(r'<script src="([^"]+)"></script>', inline, html)
 html = embed_assets(html)
 assert 'src="js/' not in html and 'src="data/' not in html, 'algum script não foi embutido'
