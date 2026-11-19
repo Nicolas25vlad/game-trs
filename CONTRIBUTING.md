@@ -29,7 +29,8 @@ node tests/run.cjs world input   # só os conjuntos cujo nome contém "world" ou
 ```
 
 Todo comportamento novo precisa de teste:
-- **Física, IA, regras em campo:** `tests/world.test.cjs`.
+- **Física da bola e dos corpos:** `tests/physics.test.cjs`. As constantes ficam em `MD.World.PHYS`, com unidades.
+- **IA e regras em campo:** `tests/world.test.cjs`.
 - **Entrada:** `tests/input.test.cjs`.
 - **Leis do jogo e motor estatístico:** `tests/rules.test.cjs`, `tests/montecarlo.test.cjs`.
 - **Copa, Germinare, catálogo:** o teste com o nome correspondente.

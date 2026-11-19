@@ -19,7 +19,10 @@ console.log('Jogável — movimento e controle:');
  run(w,2.5);ok(w.stats[0].passOk>=1||w.ball.owner&&w.ball.owner.team===0,'a bola realmente chega a um companheiro');
  const p=h.player;ok(p&&p!==w.restart?.taker,'controle passou automaticamente para quem recebeu');
  ok(w.teams[1].players.some((q,i)=>Math.hypot(q.x-ai0[i][0],q.z-ai0[i][1])>.5),'os outros 21 atletas continuam se movendo pela IA');
- h.autoSwitch=false;const P=h.player;w.setCommand('p1',cmd({mx:1}));run(w,1);const x0=P.x;run(w,.5);const dRun=P.x-x0;
+ h.autoSwitch=false;const P=h.player;
+ /* mede o movimento em campo aberto: com corpos, correr para cima de um adversário agora esbarra nele */
+ P.x=-25;P.z=10;P.vx=P.vz=0;
+ w.setCommand('p1',cmd({mx:1}));run(w,1);const x0=P.x;run(w,.5);const dRun=P.x-x0;
  ok(dRun>2&&P.vx>4,`movimento: para a direita a ${P.vx.toFixed(1)} m/s (${dRun.toFixed(1)} m em 0,5 s)`);
  const x1=P.x,z1=P.z;w.setCommand('p1',cmd({mx:.707,mz:.707}));run(w,1);ok(P.x-x1>2&&P.z-z1>2,'movimento diagonal (duas teclas ao mesmo tempo)');
  w.setCommand('p1',cmd({mx:-1}));run(w,.7);const sp1=P.sp;w.setCommand('p1',cmd({mx:-1,sprint:true}));run(w,1.2);const sp2=P.sp;
