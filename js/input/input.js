@@ -67,7 +67,8 @@ IN.poll=function(){const C=IN.cfg;
    const [rx,ry]=dz(g.axes[2]||0,g.axes[3]||0,Math.max(.25,C.deadzone));s.rs=Math.hypot(rx,ry)>0?{x:rx,y:ry}:null;
    for(const a of ['sprint','pass','shoot','cross','through','switch','tackle','skill','support','pause'])s[a]=on(a);
    s.confirm=btn(0);s.back=btn(1);s.pad=g;}
-  else if(d.kind==='remote'){const r=d.remote;if(r&&performance.now()-r.at<800){s.mx=r.x;s.my=r.y;for(const a of ['sprint','pass','shoot','cross','through','switch','tackle','skill','support','pause'])s[a]=!!r[a];s.confirm=!!r.pass;s.back=!!r.through&&false;}
+  else if(d.kind==='remote'){const r=d.remote;if(r&&performance.now()-r.at<800){s.mx=r.x;s.my=r.y;const L=r.latch||{};for(const a of REMOTE_BTNS)s[a]=!!r[a]||!!L[a]&&!d.prev[a];s.confirm=s.pass;s.back=false;}
+   if(r)r.latch=null;/* toques já entregues a este quadro */
    /* sem pacote recente: comando zerado (o celular não pode "continuar andando" sozinho) */}
   /* comandos contextuais derivados (o motor só vê o formato lógico) */
   s.press=s.pass||s.tackle;s.shield=s.tackle;s.gkRush=s.through;
@@ -77,7 +78,11 @@ IN.poll=function(){const C=IN.cfg;
  if(IN.capture&&IN.capture.kind==='pad'){const pads=navigator.getGamepads?navigator.getGamepads():[];for(const g of pads){if(!g)continue;for(let i=0;i<g.buttons.length;i++)if(g.buttons[i].pressed&&!(IN.capture.ignore||new Set()).has(g.index+':'+i)){const f=IN.capture;IN.capture=null;f.fn(i);return;}}}};
 IN.pressed=(d,a)=>!!d&&d.state[a]&&!d.prev[a];
 /* remoto: o módulo de rede chama isto com o último pacote validado */
-IN.remoteUpdate=function(id,label,pkt){let d=IN.devices.get(id);if(!d||!d.connected){d=addDevice({id,kind:'remote',label,short:label,icon:'📱'});}d.remote={...pkt,at:performance.now()};};
+/* Igual ao "tapped" do teclado: um botão apertado e solto entre duas leituras (pacotes agrupados pelo Wi-Fi) não se perde.
+   latch guarda todo botão visto apertado desde a última leitura; IN.poll o consome. */
+const REMOTE_BTNS=['sprint','pass','shoot','cross','through','switch','tackle','skill','support','pause'];
+IN.remoteUpdate=function(id,label,pkt){let d=IN.devices.get(id);if(!d||!d.connected){d=addDevice({id,kind:'remote',label,short:label,icon:'📱'});}
+ const latch={...(d.remote&&d.remote.latch||{})};for(const a of REMOTE_BTNS)if(pkt[a])latch[a]=true;d.remote={...pkt,latch,at:performance.now()};};
 IN.remoteGone=function(id){const d=IN.devices.get(id);if(d){d.connected=false;d.remote=null;d.state=newState();emit('disconnect',d);}};
 IN.rumble=function(dev,ms,k){if(!IN.cfg.vibration||!dev)return;try{if(dev.kind==='gamepad'){const g=(navigator.getGamepads()||[])[dev.index];const v=g&&g.vibrationActuator;if(v&&v.playEffect)v.playEffect('dual-rumble',{duration:ms||120,strongMagnitude:k||.6,weakMagnitude:(k||.6)*.6});}else if(dev.kind==='remote'&&dev.sendRumble)dev.sendRumble(ms||80);}catch(e){}};
 /* comando para o motor: converte o analógico da tela para o mundo usando a orientação da câmera */
