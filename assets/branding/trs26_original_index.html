@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traficas Revolution Soccer 26</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Russo+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <main class="cover-screen" id="coverScreen">
+        <div class="cover-background"></div>
+        <div class="cover-actions">
+            <button class="cover-button cover-play" id="btnAbrirMenu">JOGAR</button>
+        </div>
+        <div class="cover-trophies" aria-hidden="true">
+            <img src="BOLA_DE_OURO.webp" alt="" class="cover-trophy trophy-ball">
+            <img src="TACA_DA_COPA.webp" alt="" class="cover-trophy trophy-cup">
+        </div>
+    </main>
+
+    <main class="main-menu" id="mainMenu" hidden>
+        <div class="menu-background"></div>
+        <div class="menu-shade"></div>
+        <div class="menu-texture"></div>
+        <header class="menu-header">
+            <img class="game-logo" src="logo.webp" alt="Traficas Revolution Soccer 26">
+        </header>
+        <nav class="menu-navigation" aria-label="Menu principal">
+            <button class="menu-option" id="btnModoCarreira"><span class="option-number">01</span><span>MODO CARREIRA</span></button>
+            <button class="menu-option" id="btnModoHistoria"><span class="option-number">02</span><span>MODO HISTÓRIA</span></button>
+            <button class="menu-option" id="btnPartidaRapida"><span class="option-number">03</span><span>PARTIDA RÁPIDA</span></button>
+            <button class="menu-option" id="btnCreditosMenu"><span class="option-number">04</span><span>CRÉDITOS</span></button>
+        </nav>
+        <section class="pose-stage" aria-label="Jogadores em destaque">
+            <img class="pose is-entering" src="pose_1.webp" alt="Jogador em destaque">
+            <img class="pose" src="pose_2.webp" alt="Jogador em destaque">
+            <img class="pose" src="pose_3.webp" alt="Jogador em destaque">
+            <img class="pose" src="pose_4.webp" alt="Jogador em destaque">
+            <img class="pose pose-wide" src="pose_5.webp" alt="Jogador em destaque">
+        </section>
+    </main>
+
+    <div class="modal-overlay" id="modalCreditos" aria-hidden="true">
+        <section class="modal-content" role="dialog" aria-modal="true" aria-labelledby="creditsTitle">
+            <h2 id="creditsTitle">CRÉDITOS</h2>
+            <p><strong>Traficas Revolution Soccer 26</strong></p>
+            <p>Desenvolvido por: Julio Menezes</p>
+            <p>Conceito e Design: Julio Menezes</p>
+            <button class="btn-close" id="btnFechar">FECHAR</button>
+        </section>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

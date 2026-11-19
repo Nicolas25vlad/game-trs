@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="theme-color" content="#060b14"/>
+<title>TRS26 · Traficas Revolution Soccer 26 — MATCHDAY 0.6</title>
+<link rel="icon" href="assets/branding/logo.webp"/>
+<link href="styles.css" rel="stylesheet"/>
+<link href="css/trs26.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="bg-layer"><div class="bg-grid"></div><div class="bg-glow g1"></div><div class="bg-glow g2"></div></div>
+<div id="loading" class="loading"><img class="loading-logo" src="assets/branding/logo.webp" alt="TRS26"><div class="loading-text">Preparando o estádio…</div><div class="loading-bar"><i id="loading-bar"></i></div></div>
+<div id="app">
+<header class="topbar">
+ <button class="brand" data-go="home" aria-label="Início"><img class="brand-logo" src="assets/branding/logo.webp" alt="TRS26"></button>
+ <nav class="topnav" id="topnav"><button class="nav-link" data-go="home">Início</button><button class="nav-link" data-go="select">Partida</button><button class="nav-link" data-go="controls">Controles</button><button class="nav-link" data-go="germinare">Germinare</button><button class="nav-link" data-go="copa">Copa</button><button class="nav-link" data-go="clubs">Clubes</button><button class="nav-link" data-go="settings">Ajustes</button></nav>
+ <div class="top-right"><span class="chip-version">V 0.6</span><button class="icon-btn" id="mute-btn" title="Som (M)" aria-label="Som">🔊</button></div>
+</header>
+<main>
+<!-- MENU PRINCIPAL -->
+<!-- ===================== TRS26: CAPA ===================== -->
+<section class="screen trs" id="screen-cover">
+ <div class="cover-background"></div><div class="cover-vignette"></div>
+ <div class="cover-actions"><button class="cover-button cover-play" id="btn-cover-play" data-nav>JOGAR</button><div class="cover-press" id="cover-press">PRESSIONE ENTER OU <span class="pad-glyph">A</span> NO CONTROLE</div></div>
+ <div class="cover-trophies" aria-hidden="true"><img src="assets/branding/BOLA_DE_OURO.webp" alt="" class="cover-trophy trophy-ball"><img src="assets/branding/TACA_DA_COPA.webp" alt="" class="cover-trophy trophy-cup"></div>
+ <div class="cover-ver">v0.6 · MATCHDAY ENGINE</div>
+</section>
+<!-- ===================== TRS26: MENU PRINCIPAL ===================== -->
+<section class="screen trs" id="screen-home">
+ <div class="menu-background"></div><div class="menu-shade"></div><div class="menu-texture"></div>
+ <header class="menu-header"><img class="game-logo" src="assets/branding/logo.webp" alt="Traficas Revolution Soccer 26"></header>
+ <nav class="menu-navigation" id="home-nav" aria-label="Menu principal"></nav>
+ <section class="pose-stage" aria-label="Jogadores em destaque">
+  <img class="pose" src="assets/branding/pose_1.webp" alt="Jogador em destaque"><img class="pose" src="assets/branding/pose_2.webp" alt="Jogador em destaque"><img class="pose" src="assets/branding/pose_3.webp" alt="Jogador em destaque"><img class="pose" src="assets/branding/pose_4.webp" alt="Jogador em destaque"><img class="pose pose-wide" src="assets/branding/pose_5.webp" alt="Jogador em destaque">
+ </section>
+ <div class="menu-hint" id="home-hint">↑ ↓ NAVEGAR · ENTER CONFIRMAR · ESC VOLTAR</div>
+ <div class="home-devices" id="home-devices"></div>
+</section>
+<!-- ===================== SELEÇÃO DE LADOS ===================== -->
+<section class="screen trs-panel" id="screen-sides">
+ <div class="trs-head"><div><div class="trs-kicker" id="sides-kicker">MULTIPLAYER LOCAL</div><h2>Escolha os lados</h2><p class="hint">Cada dispositivo move o próprio cartão: teclado (A/D ou ←/→), controle (analógico/direcional) ou celular (joystick). Confirme com Passe/A/Enter. Lado sem humano = IA.</p></div>
+  <div class="head-actions"><button class="btn ghost" id="sides-remote">📱 CONECTAR CELULAR</button><button class="btn ghost" data-back>← VOLTAR</button><button class="btn primary" id="sides-go">CONTINUAR ➜</button></div></div>
+ <div class="sides-board"><div class="sides-col" data-col="home"><h3>MANDANTE</h3><div class="sides-drop" id="sides-home"></div></div><div class="sides-col neutral" data-col="none"><h3>NEUTRO</h3><div class="sides-drop" id="sides-none"></div></div><div class="sides-col" data-col="away"><h3>VISITANTE</h3><div class="sides-drop" id="sides-away"></div></div></div>
+ <p class="hint" id="sides-msg"></p>
+</section>
+<!-- ===================== CONFRONTO (ESTILO PES) ===================== -->
+<section class="screen trs-versus" id="screen-versus">
+ <div class="vs-bg"></div><div class="vs-canvas" id="vs-stage"></div>
+ <div class="vs-top"><div class="vs-club h"><img id="vs-hc" alt=""><b id="vs-hn"></b><small id="vs-hctl"></small></div><div class="vs-comp"><img src="assets/branding/logo.webp" alt="TRS26" class="vs-logo"><small id="vs-comp"></small></div><div class="vs-club a"><img id="vs-ac" alt=""><b id="vs-an"></b><small id="vs-actl"></small></div></div>
+ <div class="vs-lineups"><div class="vs-lu" id="vs-lu-h"></div><div class="vs-lu" id="vs-lu-a"></div></div>
+ <div class="vs-actions"><button class="vs-btn primary" id="vs-play" data-nav>JOGAR</button><button class="vs-btn" id="vs-tactics" data-nav>ESCALAÇÃO E TÁTICAS</button></div>
+ <div class="vs-opts"><button class="vs-mini" id="vs-optbtn" data-nav>⚙ OPÇÕES</button><div class="vs-optpanel" id="vs-optpanel" hidden></div></div>
+ <div class="vs-legend" id="vs-legend"></div>
+</section>
+<!-- ===================== PARTIDA EM TELA CHEIA ===================== -->
+<section class="screen" id="screen-play">
+ <div class="play-stage" id="play-stage"></div>
+ <div class="hud" id="hud">
+  <div class="hud-score"><img id="hs-hc" alt=""><b id="hs-h"></b><span class="hs-sc" id="hs-score">0 – 0</span><b id="hs-a"></b><img id="hs-ac" alt=""><span class="hs-clock" id="hs-clock">00:00</span><i id="hs-period"></i><i class="hs-add" id="hs-add" hidden></i><span class="hs-pens" id="hs-pens" hidden></span></div>
+  <div class="hud-mode" id="hud-mode"></div>
+  <div class="hud-tags" id="hud-tags"></div>
+  <div class="hud-players" id="hud-players"></div>
+  <canvas class="hud-mini" id="hud-mini" width="200" height="128" aria-label="Minimapa"></canvas>
+  <div class="hud-context" id="hud-context" hidden></div>
+  <div class="hud-banner" id="hud-banner" hidden></div>
+  <div class="hud-hints" id="hud-hints"></div>
+  <div class="hud-ff" id="hud-ff" hidden></div>
+  <div class="hud-replay" id="hud-replay" hidden>REPLAY</div>
+  <pre class="hud-diag" id="hud-diag" hidden></pre>
+ </div>
+ <div class="cine-overlay" id="play-cine" hidden></div>
+ <button class="cine-skip" id="play-skip" hidden>PULAR ⏭</button>
+ <div class="champion-overlay" id="play-champ" hidden></div>
+ <div class="overlay-menu" id="pause-menu" hidden></div>
+ <div class="overlay-menu" id="half-menu" hidden></div>
+ <div class="overlay-menu" id="post-menu" hidden></div>
+ <div class="overlay-menu" id="dc-menu" hidden></div>
+</section>
+<!-- ===================== CONTROLES ===================== -->
+<section class="screen trs-panel" id="screen-controls">
+ <div class="trs-head"><div><div class="trs-kicker">CONFIGURAÇÕES</div><h2>Controles</h2><p class="hint">Teclado, controles (Gamepad API) e assistências. Clique em uma tecla/botão para redefinir.</p></div><div class="head-actions"><button class="btn ghost" id="ctl-reset">RESTAURAR PADRÃO</button><button class="btn ghost" data-back>← VOLTAR</button></div></div>
+ <div class="ctl-layout"><div class="card" id="ctl-map"></div><div class="card" id="ctl-opts"></div></div>
+</section>
+<!-- ===================== CONTROLE VIRTUAL (CELULAR) ===================== -->
+<section class="screen trs-panel" id="screen-remote">
+ <div class="trs-head"><div><div class="trs-kicker">CONTROLE VIRTUAL</div><h2>Conectar celular</h2><p class="hint">O celular vira um controle (somente entrada). Exige o servidor local de pareamento — veja as instruções abaixo.</p></div><div class="head-actions"><button class="btn ghost" data-back>← VOLTAR</button></div></div>
+ <div class="remote-layout" id="remote-body"></div>
+</section>
+<section class="screen" id="screen-menu">
+ <div class="menu-hero2">
+  <div class="mh-copy"><div class="kicker"><span></span>TEMPORADA 2026 · ATUALIZAÇÃO 0.5</div>
+   <h1>Do pátio da escola<br/>à <em>grande final.</em></h1>
+   <p>Partidas ao vivo com ritmo de transmissão, entrada dos times, hino e toque inicial. Monte seu quinteto no Germinare, organize a Copa e acompanhe o capitão erguendo a taça.</p>
+   <div class="menu-cta"><button class="btn primary big" id="menu-play">PARTIDA RÁPIDA <b>➜</b></button><button class="btn ghost big" data-go="copa">MODO COPA</button></div>
+   <div class="menu-last" id="menu-last"></div></div>
+  <div class="mh-feature" id="menu-feature"><div class="mf-trophy" id="menu-trophy"></div><div class="mf-text"><small>DESTAQUE</small><b id="mf-title">Modo Germinare</b><span id="mf-sub">5 contra 5 no campo da escola · 5 minutos ou 2 gols</span><button class="btn primary small" id="mf-go">MONTAR MEU TIME ➜</button></div></div>
+ </div>
+ <div class="mode-grid">
+  <button class="mode-tile mt-quick" id="mt-quick"><i class="mt-ico">▶</i><strong>Partida rápida</strong><small>Escolha dois clubes e assista ao vivo</small></button>
+  <button class="mode-tile mt-germ" data-go="germinare"><i class="mt-ico">🏫</i><strong>Modo Germinare</strong><small>Seleção livre de 5 jogadores · campo da escola</small></button>
+  <button class="mode-tile mt-copa" data-go="copa"><i class="mt-ico">🏆</i><strong>Modo Copa</strong><small>Mata-mata, grupos, prorrogação, pênaltis e cerimônia</small><em id="mt-copa-badge" hidden>EM ANDAMENTO</em></button>
+  <button class="mode-tile mt-clubs" data-go="clubs"><i class="mt-ico">🛡</i><strong>Clubes e jogadores</strong><small>Países, ligas, 40 clubes e elencos 2026</small></button>
+  <button class="mode-tile mt-kits" id="menu-kits"><i class="mt-ico">👕</i><strong>Estúdio de uniformes</strong><small>Padrões, patrocinadores, pintura e moldes</small></button>
+  <button class="mode-tile mt-set" data-go="settings"><i class="mt-ico">⚙</i><strong>Configurações</strong><small>Ritmo, apresentações, gráficos e áudio</small></button>
+ </div>
+</section>
+<!-- SELEÇÃO DE CLUBES -->
+<section class="screen" id="screen-select">
+ <div class="screen-head"><div><div class="kicker"><span></span>PARTIDA RÁPIDA · PASSO 1 DE 2</div><h2>Escolha os clubes</h2></div><div class="head-actions"><button class="btn ghost" id="swap-teams">⇆ INVERTER</button><button class="btn primary" id="to-prematch">CONTINUAR ➜</button></div></div>
+ <div class="select-layout">
+  <article class="club-pick" id="pick-home"></article>
+  <div class="vs-col"><div class="vs-big">VS</div><div class="compare" id="compare"></div><div class="side-toggle" id="side-toggle"><button data-side="home" class="active">ESCOLHENDO MANDANTE</button><button data-side="away">ESCOLHENDO VISITANTE</button></div></div>
+  <article class="club-pick" id="pick-away"></article>
+ </div>
+ <div class="browser-bar"><div class="country-chips" id="sel-countries"></div><div class="league-tabs" id="sel-leagues"></div><input class="search" id="sel-search" placeholder="Buscar clube…" aria-label="Buscar clube"/></div>
+ <div class="club-tiles" id="select-strip"></div>
+</section>
+<!-- PRÉ-JOGO -->
+<section class="screen" id="screen-prematch">
+ <div class="screen-head"><div><div class="kicker"><span></span>PASSO 2 DE 2 · PRÉ-JOGO</div><h2 id="pm-title">Confronto</h2></div><div class="head-actions"><button class="btn ghost" data-go="select">← CLUBES</button><button class="btn primary big" id="kickoff">COMEÇAR PARTIDA ▶</button></div></div>
+ <div class="prematch-grid">
+  <div class="pm-team" id="pm-home"></div>
+  <div class="pm-center">
+   <div class="pm-info card"><div class="pm-stadium"><span>ESTÁDIO</span><strong id="pm-stadium">Arena MATCHDAY</strong><small id="pm-stadium-sub">90 min + acréscimos</small></div>
+    <div class="pm-row"><label>Ritmo da transmissão<select id="pm-pace"><option value="slow">Lento</option><option value="normal">Normal</option><option value="fast">Rápido</option></select></label>
+     <label>Frequência de lances<select id="pm-rate"><option value="few">Poucos (só os principais)</option><option value="normal">Normal</option><option value="many">Muitos</option></select></label>
+     <label>Semente (opcional)<input id="pm-seed" placeholder="aleatória" maxlength="20"/></label><label class="switch"><input type="checkbox" id="pm-cinema"/><span>Apresentação pré-jogo (entrada, hino, cumprimentos)</span></label></div></div>
+   <div class="pm-pitch card"><canvas id="pm-canvas" width="560" height="720" aria-label="Escalações em campo"></canvas></div>
+   <div class="pm-keys card" id="pm-keys"></div>
+  </div>
+  <div class="pm-team" id="pm-away"></div>
+ </div>
+</section>
+<!-- PARTIDA -->
+<section class="screen" id="screen-match">
+ <div class="match-layout">
+  <div class="broadcast-col">
+   <div class="broadcast" id="broadcast">
+    <canvas id="gl-canvas" aria-label="Transmissão 3D"></canvas><canvas id="c2d-canvas" hidden aria-label="Transmissão alternativa"></canvas>
+    <div class="tv-score" id="tv-score"><div class="tvs-live"><i></i><span id="tvs-tag">AO VIVO</span></div><div class="tvs-team"><img id="tvs-hcrest" alt=""/><b id="tvs-home">CAS</b></div><div class="tvs-num" id="tvs-score">0 – 0</div><div class="tvs-team"><b id="tvs-away">VIS</b><img id="tvs-acrest" alt=""/></div><div class="tvs-clock"><b id="tvs-clock">00:00</b><small id="tvs-half">1º T</small><span id="tvs-added" hidden>+3</span></div><div class="tvs-pens" id="tvs-pens" hidden></div></div>
+    <div class="tv-brand">MD<i></i>SPORTS</div>
+    <div class="replay-badge" id="replay-badge" hidden><i></i><span id="replay-text">REPLAY</span></div>
+    <div class="tv-label" id="tv-label" hidden></div>
+    <div class="lower-third" id="lower-third" hidden></div>
+    <div class="goal-flash" id="goal-flash" hidden><div class="gf-word">GOOOL!</div><div class="gf-sub" id="gf-sub"></div></div>
+    <div class="ticker-pop" id="ticker-pop" hidden></div>
+    <div class="idle-hud" id="idle-hud"><span class="pulse"></span><span id="idle-text">A bola está rolando…</span></div>
+    <div class="half-overlay" id="half-overlay" hidden></div>
+    <div class="cine-overlay" id="cine-overlay" hidden></div>
+    <div class="cine-chapters" id="cine-chapters" hidden></div>
+    <button class="cine-skip" id="cine-skip" hidden title="Pular apresentação (Enter)">PULAR APRESENTAÇÃO ⏭</button>
+    <div class="champion-overlay" id="champion-overlay" hidden></div>
+    <div class="diag" id="diag" hidden></div>
+   </div>
+   <div class="controls">
+    <button class="cbtn" id="c-prev" title="Lance anterior (←)">⏮</button><button class="cbtn play" id="c-play" title="Pausar (Espaço)">❚❚</button><button class="cbtn" id="c-next" title="Próximo lance (→)">⏭</button>
+    <div class="seek"><div class="seek-bar" id="seek-bar"><i id="seek-fill"></i><div id="seek-marks"></div></div><span id="seek-label">00:00</span></div>
+    <button class="tbtn" id="c-skip" title="Pular lance (S)">PULAR ⏩</button><button class="tbtn" id="c-pace" title="Ritmo (P)">NORMAL</button><button class="tbtn" id="c-speed" title="Aceleração entre lances">1X</button><button class="tbtn" id="c-cam" title="Câmera (C)">AUTO</button><button class="tbtn live" id="c-live" hidden>AO VIVO ⟳</button>
+   </div>
+   <div class="match-stats card" id="quick-stats"></div>
+  </div>
+  <aside class="side-col card">
+   <div class="tabs" id="side-tabs"><button class="tab active" data-tab="feed">Lances</button><button class="tab" data-tab="stats">Estatísticas</button><button class="tab" data-tab="lineups">Escalações</button></div>
+   <div class="tab-body" id="tab-feed"><div class="feed" id="feed"></div></div>
+   <div class="tab-body" id="tab-stats" hidden><div id="stats-full"></div></div>
+   <div class="tab-body" id="tab-lineups" hidden><div id="lineups-live"></div></div>
+  </aside>
+ </div>
+</section>
+<!-- PÓS-JOGO -->
+<section class="screen" id="screen-post">
+ <div class="post-hero card" id="post-hero"></div>
+ <div class="post-grid"><div class="card" id="post-stats"></div><div class="card" id="post-motm"></div><div class="card" id="post-highlights"></div></div>
+ <div class="post-actions"><button class="btn primary" id="post-copa" hidden>VOLTAR AO TORNEIO ➜</button><button class="btn ghost" id="post-rematch">REVANCHE ↻</button><button class="btn primary" id="post-new">NOVA PARTIDA ➜</button><button class="btn ghost" data-go="home">MENU</button></div>
+</section>
+<!-- GERMINARE -->
+<section class="screen" id="screen-germinare">
+ <div class="screen-head"><div><div class="kicker germ"><span></span>MODO GERMINARE · INSTITUTO J&amp;F</div><h2>Monte os quintetos</h2><p class="hint">1 goleiro + 4 jogadores de linha de qualquer clube. Partida de <b id="gm-rule-min">5</b> minutos ou até um time fazer <b id="gm-rule-goals">2</b> gols.</p></div>
+  <div class="head-actions"><button class="btn ghost" id="gm-random">🎲 SORTEAR</button><button class="btn primary big" id="gm-start">JOGAR NA ESCOLA ▶</button></div></div>
+ <div class="germ-layout">
+  <div class="germ-team card" id="gm-team-a"></div>
+  <div class="germ-browser card">
+   <div class="gb-filters"><input class="search" id="gb-search" placeholder="Buscar jogador…"/><select id="gb-country"></select><select id="gb-league"></select><select id="gb-club"></select><select id="gb-pos"><option value="">Todas as posições</option><option value="GK">Goleiros</option><option value="DEF">Defensores</option><option value="MID">Meio-campistas</option><option value="ATT">Atacantes</option></select><select id="gb-sort"><option value="ovr">Maior overall</option><option value="name">Nome</option></select></div>
+   <div class="gb-target" id="gb-target"></div>
+   <div class="gb-grid" id="gb-grid"></div>
+   <div class="gb-pager" id="gb-pager"></div>
+  </div>
+  <div class="germ-team card" id="gm-team-b"></div>
+ </div>
+ <div class="germ-bottom">
+  <div class="card germ-preview"><h3>Visualização 3D</h3><div class="gp-wrap" id="gm-preview-slot"></div><div class="hint" id="gm-preview-name">Passe o mouse sobre um card</div></div>
+  <div class="card germ-rules"><h3>Regras do Germinare</h3><div class="fgrid three"><label>Duração<select id="gm-minutes"><option value="3">3 min</option><option value="5">5 min</option><option value="7">7 min</option><option value="10">10 min</option></select></label><label>Gols para vencer<select id="gm-goals"><option value="2">2 gols</option><option value="3">3 gols</option><option value="0">Sem limite</option></select></label><label>Pênaltis<select id="gm-pens"><option value="1">Com pênaltis</option><option value="0">Sem pênaltis (tiro livre)</option></select></label><label>Bola na lateral<select id="gm-restart"><option value="kick">Tiro lateral (pé)</option><option value="throw">Arremesso lateral</option></select></label><label>Ritmo<select id="gm-pace"><option value="slow">Lento</option><option value="normal">Normal</option><option value="fast">Rápido</option></select></label><label class="switch"><input type="checkbox" id="gm-cinema"/><span>Apresentação da escola</span></label></div><p class="hint">Sem impedimento. Campo, gols e áreas do futebol reduzido. Empate permitido em partida comum.</p></div>
+  <div class="card germ-saved"><h3>Seleções salvas</h3><div id="gm-saved"></div></div>
+ </div>
+</section>
+<!-- MODO COPA -->
+<section class="screen" id="screen-copa">
+ <div class="screen-head"><div><div class="kicker gold"><span></span>MODO COPA</div><h2 id="copa-title">Torneios</h2></div><div class="head-actions" id="copa-actions"></div></div>
+ <div id="copa-body"></div>
+</section>
+<!-- CLUBES -->
+<section class="screen" id="screen-clubs">
+ <div class="screen-head"><div><div class="kicker"><span></span>PAÍS → LIGA → CLUBE → ELENCO</div><h2>Clubes e jogadores</h2></div><div class="head-actions"><label class="btn ghost" for="import-file">IMPORTAR JSON</label><input type="file" id="import-file" accept=".json,application/json" hidden/><button class="btn ghost" id="export-all">EXPORTAR TUDO</button><button class="btn primary" id="add-club">+ NOVO CLUBE</button></div></div>
+ <div class="clubs-layout">
+  <aside class="card clubs-side"><h3>Países e ligas</h3><div id="cb-tree"></div><div class="cb-newleague"><input id="cb-league-name" placeholder="Nome da nova liga" maxlength="40"/><select id="cb-league-country"></select><button class="btn ghost small" id="cb-league-add">+ CRIAR LIGA</button></div><p class="hint" id="cb-data-note"></p></aside>
+  <div class="clubs-main"><div class="browser-bar"><input class="search" id="cb-search" placeholder="Buscar clube…"/><span class="hint" id="cb-count"></span><button class="btn ghost small" id="cb-compare-btn">COMPARAR 2 CLUBES</button></div>
+   <div class="club-grid" id="club-grid"></div><div class="card compare-panel" id="cb-compare" hidden></div></div>
+ </div>
+</section>
+<!-- CONFIGURAÇÕES -->
+<section class="screen" id="screen-settings">
+ <div class="screen-head"><div><div class="kicker"><span></span>PREFERÊNCIAS</div><h2>Configurações</h2></div></div>
+ <div class="settings-grid">
+  <div class="card set-card"><h3>Transmissão</h3>
+   <label>Ritmo da partida<select id="set-pace"><option value="slow">Lento</option><option value="normal">Normal</option><option value="fast">Rápido</option></select></label>
+   <label>Lances em 3D<select id="set-rate"><option value="few">Poucos</option><option value="normal">Normal</option><option value="many">Muitos</option></select></label>
+   <label class="switch"><input type="checkbox" id="set-cinema"/><span>Apresentações pré-jogo (estádio, entrada, hino, cumprimentos)</span></label>
+   <label class="switch"><input type="checkbox" id="set-replays"/><span>Replay automático em câmera lenta após gols e grandes lances</span></label>
+   <label class="switch"><input type="checkbox" id="set-celebrations"/><span>Mostrar comemorações completas</span></label>
+   <label>Câmera padrão<select id="set-cam"><option value="auto">Automática</option><option value="tv">TV</option><option value="dynamic">Dinâmica</option><option value="close">Próxima</option><option value="aerial">Aérea</option><option value="goal">Atrás do gol</option></select></label></div>
+  <div class="card set-card"><h3>Hino e músicas</h3><p class="hint">Por padrão toca uma fanfarra original sintetizada. Você pode enviar um arquivo de áudio próprio (MP3, OGG, WAV, até 8 MB). Não incluímos gravações comerciais de hinos.</p>
+   <label>Música da apresentação<select id="set-anthem"><option value="synth">Fanfarra original MATCHDAY</option><option value="file">Arquivo enviado por mim</option><option value="off">Sem música</option></select></label>
+   <div class="btn-row"><label class="btn ghost small">ENVIAR ÁUDIO<input type="file" id="set-anthem-file" accept="audio/*" hidden/></label><button class="btn ghost small" id="set-anthem-test">OUVIR</button></div><p class="hint" id="anthem-info"></p></div>
+  <div class="card set-card"><h3>Gráficos</h3>
+   <label>Qualidade<select id="set-quality"><option value="auto">Automático (ajusta pelo desempenho)</option><option value="low">Baixo</option><option value="medium">Médio</option><option value="high">Alto</option></select></label>
+   <label class="switch"><input type="checkbox" id="set-diag"/><span>Painel de diagnóstico (FPS, tempo de quadro, draw calls)</span></label>
+   <p class="hint" id="gpu-info"></p></div>
+  <div class="card set-card"><h3>Áudio</h3>
+   <label>Volume geral<input type="range" id="set-master" min="0" max="1" step=".05"/></label><label>Torcida e ambiente<input type="range" id="set-crowd" min="0" max="1" step=".05"/></label><label>Efeitos<input type="range" id="set-sfx" min="0" max="1" step=".05"/></label><label>Música<input type="range" id="set-music" min="0" max="1" step=".05"/></label>
+   <label class="switch"><input type="checkbox" id="set-muted"/><span>Silenciar tudo</span></label><button class="btn ghost small" id="test-sound">TESTAR APITO</button></div>
+  <div class="card set-card"><h3>Simulação</h3>
+   <label>Substituições por time<select id="set-subs"><option value="3">3</option><option value="5">5</option><option value="0">Nenhuma</option></select></label>
+   <label class="switch"><input type="checkbox" id="set-autosubs"/><span>Substituições automáticas por cansaço</span></label></div>
+  <div class="card set-card"><h3>Dados</h3><p class="hint">Dados padrão (40 clubes) vêm no jogo; suas edições ficam separadas no navegador (localStorage + IndexedDB para imagens) e nunca são sobrescritas por atualizações. Clubes da 0.3/0.4 são preservados.</p>
+   <div class="btn-row"><button class="btn ghost small" id="set-export">EXPORTAR BACKUP</button><button class="btn danger small" id="set-reset">DESFAZER EDIÇÕES DOS CLUBES PADRÃO</button></div><p class="hint" id="storage-info"></p></div>
+ </div>
+</section>
+</main>
+<nav class="bottom-nav" id="bottom-nav"><button data-go="home">⌂<small>Início</small></button><button data-go="select">▶<small>Partida</small></button><button data-go="germinare">🏫<small>Germinare</small></button><button data-go="copa">🏆<small>Copa</small></button><button data-go="clubs">🛡<small>Clubes</small></button></nav>
+</div>
+<div class="modal" id="tactics-modal" hidden><div class="modal-box xwide trs-modal-box" role="dialog" aria-modal="true" aria-labelledby="tk-title">
+ <div class="modal-head"><div><div class="kicker"><span></span>ESCALAÇÃO E TÁTICAS</div><h2 id="tk-title">Campo tático</h2></div><div class="tabs pills" id="tk-tabs"></div><button class="icon-close" data-tkclose aria-label="Fechar">✕</button></div>
+ <div class="modal-body tk-layout"><div><div class="tk-pitch" id="tk-pitch"></div><h4 class="tk-bench-title">RESERVAS</h4><div class="tk-bench" id="tk-bench"></div></div><div class="tk-side" id="tk-side"></div></div>
+ <div class="modal-foot"><span class="hint">Selecione um atleta e depois outro para trocar. Funciona com mouse, teclado e controle.</span><button class="btn primary" data-tkclose>CONCLUIR ✓</button></div></div></div>
+<div class="modal" id="credits-modal" hidden><div class="modal-box trs-credits" role="dialog" aria-modal="true" aria-labelledby="credits-title"><h2 id="credits-title">CRÉDITOS</h2>
+ <p><strong>Traficas Revolution Soccer 26</strong></p><p>Desenvolvido por: Julio Menezes</p><p>Conceito e Design: Julio Menezes</p><p class="hint">Motor de futebol, renderizador WebGL e sistemas do jogo: projeto MATCHDAY (HTML, CSS, JavaScript e WebGL, sem engine).</p><p class="hint">Áudio gerado pelo próprio jogo (WebAudio). Escudos e jogadores sem imagens licenciadas usam marcadores próprios.</p>
+ <button class="btn primary" data-close="credits-modal">FECHAR</button></div></div>
+<div class="modal" id="club-modal" hidden><div class="modal-box wide" role="dialog" aria-modal="true" aria-labelledby="ce-title">
+ <div class="modal-head"><div><div class="kicker"><span></span>CLUB BUILDER</div><h2 id="ce-title">Editar clube</h2></div><button class="icon-close" data-close="club-modal" aria-label="Fechar">×</button></div>
+ <div class="tabs" id="ce-tabs"><button class="tab active" data-tab="ident">Identidade</button><button class="tab" data-tab="squad">Elenco</button><button class="tab" data-tab="tactics">Táticas</button><button class="tab" data-tab="kits">Uniformes</button></div>
+ <div class="modal-body">
+  <div class="ce-pane" id="ce-ident"><div class="ident-grid"><div class="crest-edit"><div class="crest-big" id="ce-crest"></div><label class="btn ghost small">ENVIAR ESCUDO<input type="file" id="ce-crest-file" accept="image/*" hidden/></label><button class="btn ghost small" id="ce-crest-remove">USAR ESCUDO GERADO</button></div>
+   <div class="form-grid"><label>Nome do clube<input id="ce-name" maxlength="30"/></label><label>Sigla (3 letras)<input id="ce-short" maxlength="3"/></label><label>Cidade / origem<input id="ce-city" maxlength="45"/></label><label>Estádio<input id="ce-stadium" maxlength="40"/></label><label>País<select id="ce-country"></select></label><label>Liga<select id="ce-league"></select></label><label>Estado (UF)<input id="ce-uf" maxlength="20"/></label><label class="switch"><input type="checkbox" id="ce-real"/><span>Clube real (dados pesquisados)</span></label><p class="hint" id="ce-source" style="grid-column:1/-1"></p>
+    <label>Cor principal<input type="color" id="ce-primary"/></label><label>Cor secundária<input type="color" id="ce-secondary"/></label><label>Cor do goleiro<input type="color" id="ce-keeper"/></label><div class="ovr-box"><span>OVR DO TIME</span><strong id="ce-ovr">--</strong><small>média dos 11 titulares</small></div></div></div></div>
+  <div class="ce-pane" id="ce-squad" hidden><div class="squad-head"><span>TITULARES</span><small>Clique em “Editar” para atributos e aparência 3D. O OVR é calculado pelos atributos e pela posição.</small></div><div id="ce-starters" class="squad-list"></div><div class="squad-head"><span>RESERVAS</span></div><div id="ce-bench" class="squad-list"></div></div>
+  <div class="ce-pane" id="ce-tactics" hidden><div class="tactic-grid"><div class="form-grid" id="ce-tactic-form"></div><canvas id="ce-tactic-canvas" width="420" height="560"></canvas></div></div>
+  <div class="ce-pane" id="ce-kits" hidden><div class="kit-cards" id="ce-kit-cards"></div><p class="hint">O estúdio abre com visualizador 3D, pintura, patrocinadores e importação de moldes.</p></div>
+ </div>
+ <div class="modal-foot"><button class="btn ghost" data-close="club-modal">CANCELAR</button><button class="btn primary" id="ce-save">SALVAR CLUBE ✓</button></div>
+</div></div>
+
+<!-- CRIADOR DE JOGADOR -->
+<div class="modal" id="player-modal" hidden><div class="modal-box xwide" role="dialog" aria-modal="true" aria-labelledby="pe-title">
+ <div class="modal-head"><div><div class="kicker"><span></span>PLAYER CREATOR · 3D</div><h2 id="pe-title">Criador de jogador</h2></div><button class="icon-close" data-close="player-modal" aria-label="Fechar">×</button></div>
+ <div class="pe-layout">
+  <div class="viewer" id="pe-viewer"><div class="viewer-slot" id="pe-slot"></div>
+   <div class="viewer-tools"><button data-view="front">Frente</button><button data-view="back">Costas</button><button data-view="left">Esq.</button><button data-view="right">Dir.</button><button data-view="face">Rosto</button><input type="range" id="pe-zoom" min="1.6" max="7" step=".1" value="3.6" aria-label="Zoom"/></div>
+   <div class="viewer-emotes"><span>EXPRESSÕES AUTOMÁTICAS · PRÉVIA</span><div id="pe-emotes"></div></div>
+   <div class="viewer-anims"><span>ANIMAÇÃO</span><div id="pe-anims"></div></div>
+  </div>
+  <div class="pe-panel">
+   <div class="presets" id="pe-presets"></div>
+   <div class="tabs small" id="pe-tabs"><button class="tab active" data-tab="perfil">Perfil</button><button class="tab" data-tab="rosto">Rosto</button><button class="tab" data-tab="cabelo">Cabelo</button><button class="tab" data-tab="barba">Barba</button><button class="tab" data-tab="corpo">Corpo</button><button class="tab" data-tab="extras">Extras</button><button class="tab" data-tab="atributos">Atributos</button></div>
+   <div class="pe-body" id="pe-body"></div>
+  </div>
+ </div>
+ <div class="modal-foot"><span class="hint">As expressões mudam sozinhas durante a partida conforme os acontecimentos.</span><button class="btn ghost" data-close="player-modal">CANCELAR</button><button class="btn primary" id="pe-apply">APLICAR ✓</button></div>
+</div></div>
+
+<!-- ESTÚDIO DE UNIFORMES -->
+<div class="modal" id="kit-modal" hidden><div class="modal-box xwide" role="dialog" aria-modal="true" aria-labelledby="ks-title">
+ <div class="modal-head"><div><div class="kicker"><span></span>KIT STUDIO</div><h2 id="ks-title">Estúdio de uniformes</h2></div><div class="tabs pills" id="ks-kitsel"><button class="tab active" data-kit="home">1º uniforme</button><button class="tab" data-kit="away">2º uniforme</button><button class="tab" data-kit="third">3º uniforme</button><button class="tab" data-kit="gk">Goleiro</button></div><button class="icon-close" data-close="kit-modal" aria-label="Fechar">×</button></div>
+ <div class="ks-layout">
+  <div class="viewer" id="ks-viewer"><div class="viewer-slot" id="ks-slot"></div>
+   <div class="viewer-tools"><button data-kview="front">Frente</button><button data-kview="back">Costas</button><button data-kview="left">Esq.</button><button data-kview="right">Dir.</button><button data-kview="detail">Detalhe</button><input type="range" id="ks-zoom" min="1.4" max="7" step=".1" value="3.4" aria-label="Zoom"/></div>
+   <div class="viewer-emotes"><span>FOCO</span><div><button data-focus="shirt" class="active">Camisa</button><button data-focus="shorts">Calção</button><button data-focus="socks">Meião</button></div></div>
+   <div class="ks-flat"><canvas id="ks-front" width="220" height="250"></canvas><canvas id="ks-back" width="220" height="250"></canvas></div>
+  </div>
+  <div class="ks-panel">
+   <div class="tabs small" id="ks-tabs"><button class="tab active" data-tab="design">Camisa</button><button class="tab" data-tab="lower">Calção e meião</button><button class="tab" data-tab="sponsors">Patrocínios</button><button class="tab" data-tab="paint">Pintura</button><button class="tab" data-tab="template">Molde</button></div>
+   <div class="ks-body" id="ks-body"></div>
+  </div>
+ </div>
+ <div class="modal-foot"><span class="hint" id="ks-hint">As alterações aparecem no modelo 3D e na partida.</span><button class="btn ghost" data-close="kit-modal">CANCELAR</button><button class="btn primary" id="ks-apply">APLICAR UNIFORMES ✓</button></div>
+</div></div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="js/util.js"></script>
+<script src="js/modes.js"></script>
+<script src="js/data.js"></script>
+<script src="data/catalog_br_2026.js"></script>
+<script src="js/catalog.js"></script>
+<script src="js/rules.js"></script>
+<script src="js/engine.js"></script>
+<script src="js/germinare.js"></script>
+<script src="js/tournament.js"></script>
+<script src="js/choreo.js"></script>
+<script src="js/pacing.js"></script>
+<script src="js/cinema.js"></script>
+<script src="js/kit.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/gfx/glcore.js"></script>
+<script src="js/gfx/meshes.js"></script>
+<script src="js/gfx/anim.js"></script>
+<script src="js/gfx/character.js"></script>
+<script src="js/gfx/stadium.js"></script>
+<script src="js/gfx/bleacher.js"></script>
+<script src="js/gfx/germinare3d.js"></script>
+<script src="js/gfx/camera.js"></script>
+<script src="js/gfx/renderer3d.js"></script>
+<script src="js/gfx/renderer2d.js"></script>
+<script src="js/input/input.js"></script>
+<script src="js/input/remote.js"></script>
+<script src="js/football/world.js"></script>
+<script src="js/football/ai.js"></script>
+<script src="js/ui/app.js"></script>
+<script src="js/ui/match.js"></script>
+<script src="js/ui/editors.js"></script>
+<script src="js/ui/kitstudio.js"></script>
+<script src="js/ui/germinare_ui.js"></script>
+<script src="js/ui/copa.js"></script>
+<script src="js/ui/tactics.js"></script>
+<script src="js/ui/play.js"></script>
+<script src="js/ui/trs.js"></script>
+<script src="js/ui/boot.js"></script>
+</body>
+</html>

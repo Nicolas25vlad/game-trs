@@ -1,0 +1,479 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+    overflow: hidden;
+    background: #000;
+    color: #f5f5f5;
+    font-family: "Russo One", sans-serif;
+}
+
+button {
+    font: inherit;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+.cover-screen,
+.cover-background,
+.main-menu,
+.menu-background,
+.menu-shade,
+.menu-texture {
+    position: fixed;
+    inset: 0;
+}
+
+.cover-screen {
+    overflow: hidden;
+}
+
+.cover-background {
+    z-index: -1;
+    background: #000 url("../TRS26_FOTO.webp") right center / contain no-repeat;
+}
+
+.cover-actions {
+    position: fixed;
+    z-index: 2;
+    top: 58%;
+    left: 20%;
+}
+
+.cover-button {
+    padding: 1.15rem 4.25rem;
+    color: #fff;
+    font-size: 1.85rem;
+    letter-spacing: 0.12em;
+    border: 0;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #e63946, #c1121f);
+    box-shadow: 0 4px 15px rgba(193, 18, 31, 0.65), 0 0 30px rgba(230, 57, 70, 0.32);
+    cursor: pointer;
+    transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.cover-button:hover,
+.cover-button:focus-visible {
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 6px 24px rgba(193, 18, 31, 0.82), 0 0 44px rgba(230, 57, 70, 0.48);
+    outline: none;
+}
+
+.cover-trophies {
+    position: fixed;
+    z-index: 2;
+    bottom: 1.5rem;
+    left: 22%;
+    display: flex;
+    align-items: flex-end;
+    gap: 1rem;
+}
+
+.cover-trophy {
+    object-fit: contain;
+    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.8)) drop-shadow(0 0 30px rgba(255, 255, 255, 0.5)) drop-shadow(0 0 50px rgba(255, 215, 0, 0.3));
+}
+
+.trophy-ball {
+    width: 90px;
+    animation: floatBall 3s ease-in-out infinite, trophyGlow 2.5s ease-in-out infinite alternate;
+}
+
+.trophy-cup {
+    width: 100px;
+    animation: floatCup 3.5s ease-in-out infinite, trophyGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes floatBall {
+    50% { transform: translateY(-18px) rotate(5deg); }
+}
+
+@keyframes floatCup {
+    50% { transform: translateY(-15px) rotate(-3deg); }
+}
+
+@keyframes trophyGlow {
+    to {
+        filter: drop-shadow(0 0 25px #fff) drop-shadow(0 0 50px rgba(255, 255, 255, 0.7)) drop-shadow(0 0 70px rgba(255, 215, 0, 0.5));
+    }
+}
+
+.main-menu {
+    isolation: isolate;
+    overflow: hidden;
+}
+
+.menu-background {
+    z-index: -4;
+    background: #0b0b0b url("../menu_fundo.webp") center 42% / cover no-repeat;
+    transform: scale(1.03);
+}
+
+.menu-shade {
+    z-index: -3;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.72) 31%, rgba(0, 0, 0, 0.24) 64%, rgba(0, 0, 0, 0.56) 100%), linear-gradient(0deg, rgba(0, 0, 0, 0.7) 0%, transparent 38%, rgba(0, 0, 0, 0.36) 100%);
+}
+
+.menu-texture {
+    z-index: -2;
+    opacity: 0.32;
+    background-image: repeating-linear-gradient(-34deg, transparent 0 12px, rgba(255, 255, 255, 0.035) 13px 14px);
+    pointer-events: none;
+}
+
+.menu-header {
+    position: fixed;
+    z-index: 3;
+    top: clamp(1rem, 4vh, 3.25rem);
+    left: clamp(1rem, 4vw, 4.5rem);
+    width: min(42vw, 430px);
+}
+
+.game-logo {
+    display: block;
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 6px 15px rgba(0, 0, 0, 0.8));
+}
+
+.menu-navigation {
+    position: fixed;
+    z-index: 4;
+    top: 67%;
+    left: clamp(1rem, 4vw, 4.5rem);
+    width: min(32vw, 370px);
+    display: grid;
+    gap: 0.55rem;
+    transform: translateY(-50%);
+}
+
+.menu-option {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    min-height: 4.3rem;
+    padding: 0.75rem 1.6rem 0.75rem 4.2rem;
+    color: #f3f3f3;
+    text-align: left;
+    font-family: "Anton", sans-serif;
+    font-size: clamp(1.15rem, 2vw, 1.7rem);
+    letter-spacing: 0.06em;
+    border: 0;
+    background: linear-gradient(90deg, rgba(13, 13, 13, 0.95), rgba(13, 13, 13, 0.58));
+    box-shadow: 0 7px 18px rgba(0, 0, 0, 0.28);
+    cursor: pointer;
+    transition: transform 180ms ease, background 180ms ease, filter 180ms ease;
+}
+
+.menu-option::before {
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 3.25rem;
+    content: "";
+    background: repeating-linear-gradient(-35deg, rgba(255, 255, 255, 0.18) 0 9px, rgba(0, 0, 0, 0.65) 9px 18px);
+}
+
+.menu-option::after {
+    position: absolute;
+    top: 0;
+    right: -1.7rem;
+    width: 1.8rem;
+    height: 100%;
+    content: "";
+    background: inherit;
+    clip-path: polygon(0 0, 100% 0, 25% 100%, 0 100%);
+    pointer-events: none;
+}
+
+.menu-option:hover,
+.menu-option:focus-visible {
+    color: #15110a;
+    transform: translateX(0.5rem) scaleX(1.08);
+    transform-origin: left center;
+    filter: brightness(1.08);
+    outline: none;
+    background: linear-gradient(100deg, #f3c928, #ca8d14);
+}
+
+.menu-option:hover::before,
+.menu-option:focus-visible::before {
+    background: repeating-linear-gradient(-35deg, rgba(0, 0, 0, 0.62) 0 9px, rgba(0, 0, 0, 0.82) 9px 18px);
+}
+
+.option-number {
+    font-family: "Anton", sans-serif;
+    font-size: 1.15rem;
+    opacity: 0.62;
+}
+
+.pose-stage {
+    position: fixed;
+    z-index: 1;
+    top: 3%;
+    right: 3%;
+    width: min(57vw, 860px);
+    height: 97%;
+    pointer-events: none;
+}
+
+.pose-stage::after {
+    position: absolute;
+    z-index: 2;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 24%;
+    content: "";
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.65));
+}
+
+.pose {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: right bottom;
+    opacity: 0;
+    filter: drop-shadow(-20px 18px 18px rgba(0, 0, 0, 0.66));
+    transform: translateX(12%) scale(0.98);
+    will-change: opacity, transform, filter;
+}
+
+.pose-wide {
+    right: -15%;
+}
+
+.pose.is-entering {
+    z-index: 2;
+    animation: poseEnter 1100ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.pose.is-active {
+    z-index: 1;
+    animation: poseGlide 6900ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.pose.is-leaving {
+    z-index: 1;
+    animation: poseExit 1100ms cubic-bezier(0.55, 0, 1, 0.45) both;
+}
+
+@keyframes poseEnter {
+    0% {
+        opacity: 0;
+        filter: blur(5px) drop-shadow(-20px 18px 18px rgba(0, 0, 0, 0.35));
+        transform: translateX(12%) scale(0.98);
+    }
+    100% {
+        opacity: 1;
+        filter: blur(0) drop-shadow(-20px 18px 18px rgba(0, 0, 0, 0.66));
+        transform: translateX(4%) scale(1.02);
+    }
+}
+
+@keyframes poseGlide {
+    0% {
+        opacity: 1;
+        transform: translateX(4%) scale(1.02);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(-5%) scale(1.035);
+    }
+}
+
+@keyframes poseExit {
+    0% {
+        opacity: 1;
+        filter: blur(0) drop-shadow(-20px 18px 18px rgba(0, 0, 0, 0.66));
+        transform: translateX(-5%) scale(1.035);
+    }
+    100% {
+        opacity: 0;
+        filter: blur(4px) drop-shadow(-20px 18px 18px rgba(0, 0, 0, 0.25));
+        transform: translateX(-13%) scale(1.055);
+    }
+}
+
+.menu-hint {
+    position: fixed;
+    z-index: 4;
+    bottom: clamp(1rem, 3vh, 2.5rem);
+    left: clamp(1rem, 4vw, 4.5rem);
+    color: rgba(255, 255, 255, 0.64);
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
+}
+
+.modal-overlay {
+    position: fixed;
+    z-index: 10;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.78);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 250ms ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-content {
+    width: min(92vw, 410px);
+    padding: 2.4rem;
+    text-align: center;
+    background: linear-gradient(145deg, #252525, #0d0d0d);
+    border: 1px solid rgba(242, 201, 40, 0.58);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+    transform: translateY(1rem);
+    transition: transform 250ms ease;
+}
+
+.modal-overlay.active .modal-content {
+    transform: translateY(0);
+}
+
+.modal-content h2 {
+    margin-bottom: 1.4rem;
+    color: #f3c928;
+    font-family: "Anton", sans-serif;
+    font-size: 2rem;
+    letter-spacing: 0.12em;
+}
+
+.modal-content p {
+    margin-bottom: 0.55rem;
+    color: #c8c8c8;
+    font-family: Arial, sans-serif;
+    line-height: 1.45;
+}
+
+.modal-content strong {
+    color: #fff;
+}
+
+.btn-close {
+    margin-top: 1.45rem;
+    padding: 0.7rem 1.7rem;
+    color: #16120a;
+    border: 0;
+    background: #f3c928;
+    cursor: pointer;
+}
+
+.admin-login-form {
+    display: grid;
+    gap: 0.7rem;
+    text-align: left;
+}
+
+.admin-login-form h2 {
+    text-align: center;
+}
+
+.admin-login-form label {
+    color: #f3c928;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+}
+
+.admin-login-form input {
+    width: 100%;
+    padding: 0.8rem;
+    color: #fff;
+    border: 1px solid #4b4b4b;
+    background: #090909;
+}
+
+.admin-login-form input:focus {
+    outline: 2px solid #f3c928;
+    border-color: #f3c928;
+}
+
+.admin-login-error {
+    min-height: 1.25rem;
+    color: #ff6b6b !important;
+    font-size: 0.85rem;
+}
+
+.modal-cancel {
+    padding: 0.55rem 1rem;
+    color: #ddd;
+    border: 1px solid #555;
+    background: transparent;
+    cursor: pointer;
+}
+
+@media (max-width: 720px) {
+    .cover-actions {
+        top: 59%;
+        left: 8%;
+    }
+
+    .cover-button {
+        padding: 0.7rem 2.2rem;
+        font-size: 1.1rem;
+    }
+
+    .trophy-ball { width: 85px; }
+    .trophy-cup { width: 95px; }
+
+    .menu-background { background-position: 58% center; }
+    .menu-header { width: min(64vw, 330px); }
+    .menu-navigation {
+        top: auto;
+        bottom: 3.5rem;
+        width: min(72vw, 330px);
+        transform: none;
+    }
+    .menu-option {
+        min-height: 3.9rem;
+        font-size: 1rem;
+    }
+    .pose-stage {
+        top: 9%;
+        right: -14%;
+        width: 86vw;
+        height: 73%;
+        opacity: 0.72;
+    }
+}
+
+@media (max-width: 480px) {
+    .trophy-ball { width: 60px; }
+    .trophy-cup { width: 70px; }
+    .cover-trophies {
+        bottom: 0.8rem;
+        left: 0.8rem;
+        gap: 0.5rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cover-play,
+    .cover-trophy,
+    .pose,
+    .menu-option,
+    .modal-overlay,
+    .modal-content {
+        animation: none;
+        transition: none;
+    }
+}

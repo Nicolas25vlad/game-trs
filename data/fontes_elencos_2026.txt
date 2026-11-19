@@ -1,0 +1,1088 @@
+# Fonte principal: placardefutebol.com.br/time/<clube>/jogadores (listas "elenco 2026", consultadas em 15/11/2026 via busca)
+# Complementos: escalações de jogos de 2026 publicadas no mesmo site (números de camisa) e registros CBF (BID) quando citados.
+# Formato: POS|Nome|Idade|País|Número (- se desconhecido)
+@CLUB corinthians|Corinthians|placardefutebol.com.br/time/corinthians/jogadores; escalação Corinthians x Remo 23/07/2026; CBF Série A 2026 (registro 20001)
+GOL|Hugo Souza|27|Brasil|1
+GOL|Felipe Longo|21|Brasil|-
+GOL|Kauê|22|Brasil|-
+GOL|Matheus Donelli|24|Brasil|-
+DEF|Matheuzinho|25|Brasil|2
+DEF|Gabriel Paulista|35|Brasil|3
+DEF|Tchoca|22|Brasil|4
+DEF|André Ramalho|34|Brasil|5
+DEF|Gustavo Henrique|33|Brasil|13
+DEF|Pedro Milans|24|Uruguai|20
+DEF|Matheus Bidu|27|Brasil|21
+DEF|Fabrizio Angileri|32|Argentina|26
+DEF|Hugo|28|Brasil|-
+DEF|Renato Santos|21|Brasil|-
+MEI|Breno Bidon|21|Brasil|7
+MEI|André Carrillo|35|Peru|19
+MEI|Matheus Pereira|28|Brasil|23
+MEI|Allan|29|Brasil|29
+MEI|Charles|30|Brasil|35
+MEI|André Luiz|20|Brasil|49
+MEI|Zakaria Labyad|33|Holanda|52
+MEI|Jesse Lingard|33|Inglaterra|77
+MEI|Alex Santana|31|Brasil|80
+MEI|Rodrigo Garro|28|Argentina|-
+MEI|Raniele|29|Brasil|-
+MEI|Bahia|20|Brasil|-
+ATA|Yuri Alberto|25|Brasil|9
+ATA|Pedro Raul|29|Brasil|18
+ATA|Kaio César|22|Brasil|37
+ATA|Dieguinho|18|Brasil|61
+ATA|Memphis Depay|32|Holanda|-
+ATA|Vitinho|32|Brasil|-
+ATA|Kayke|22|Brasil|-
+ATA|Gui Negão|19|Brasil|-
+@CLUB flamengo|Flamengo|placardefutebol.com.br/time/flamengo/jogadores
+GOL|Agustín Rossi|31|Argentina|-
+GOL|Andrew|25|Brasil|-
+GOL|Dyogo Alves|22|Brasil|-
+DEF|Alex Sandro|35|Brasil|-
+DEF|Ayrton Lucas|29|Brasil|-
+DEF|Danilo|35|Brasil|-
+DEF|Emerson Royal|27|Brasil|-
+DEF|Guillermo Varela|33|Uruguai|-
+DEF|João Souza|19|Brasil|-
+DEF|Léo Ortiz|30|Brasil|-
+DEF|Léo Pereira|30|Brasil|-
+DEF|Vitão|26|Brasil|-
+MEI|Arrascaeta|32|Uruguai|-
+MEI|Erick Pulgar|32|Chile|-
+MEI|Evertton Araújo|23|Brasil|-
+MEI|Jorge Carrascal|28|Colômbia|-
+MEI|Jorginho|34|Brasil|-
+MEI|Lorran|20|Brasil|-
+MEI|Lucas Paquetá|29|Brasil|-
+MEI|Nicolás de la Cruz|29|Uruguai|-
+MEI|Saúl Ñíguez|31|Espanha|-
+ATA|Anthony Valencia|23|Equador|-
+ATA|Bruno Henrique|35|Brasil|-
+ATA|Gonzalo Plata|25|Equador|-
+ATA|Joaquín Freitas|19|Argentina|-
+ATA|Luiz Araújo|30|Brasil|-
+ATA|Pedro|29|Brasil|-
+ATA|Samuel Lino|26|Brasil|-
+@CLUB vasco|Vasco|placardefutebol.com.br/time/vasco/jogadores; escalação Vasco x Palmeiras (Copa do Brasil) 08/11/2026
+GOL|Léo Jardim|31|Brasil|1
+GOL|Daniel Fuzato|29|Brasil|-
+GOL|Pablo|23|Brasil|-
+DEF|Puma Rodríguez|29|Uruguai|2
+DEF|Lucas Piton|25|Brasil|6
+DEF|Robert Renan|22|Brasil|30
+DEF|Lucas Freitas|25|Brasil|43
+DEF|Gabriel Pereira|-|Brasil|55
+DEF|Cuiabano|23|Brasil|66
+DEF|Paulo Henrique|30|Brasil|96
+DEF|Alan Saldivia|24|Uruguai|-
+DEF|Carlos Cuesta|27|Colômbia|-
+DEF|J. Silva|17|Brasil|-
+DEF|Paulinho|22|Brasil|-
+DEF|Riquelme|23|Brasil|-
+DEF|Walace|21|Brasil|-
+MEI|Tchê Tchê|33|Brasil|3
+MEI|Santiago Sosa|-|Argentina|5
+MEI|Jair|31|Brasil|8
+MEI|Alan Lescano|-|Argentina|22
+MEI|Thiago Mendes|34|Brasil|23
+MEI|Cauan Barros|22|Brasil|-
+MEI|Guilherme Estrella|21|Brasil|-
+MEI|Hugo Moura|28|Brasil|-
+MEI|JP|21|Brasil|-
+MEI|Johan Rojas|23|Colômbia|-
+MEI|Lukas Zuccarello|19|Brasil|-
+MEI|Mateus Carvalho|24|Brasil|-
+ATA|David|30|Brasil|7
+ATA|Facundo Colidio|-|Argentina|9
+ATA|Andrés Gómez|23|Colômbia|11
+ATA|Nuno Moreira|27|Portugal|17
+ATA|Marino Hinestroza|24|Colômbia|18
+ATA|Bruno Duarte|-|Brasil|19
+ATA|Brenner|26|Brasil|20
+ATA|Adson|25|Brasil|28
+ATA|Ramon Rique|-|Brasil|83
+ATA|Claudio Spinelli|29|Argentina|-
+ATA|Loide Augusto|26|Angola|-
+@CLUB santos|Santos|placardefutebol.com.br/time/santos/jogadores; escalação Palmeiras x Santos 14/01/2026
+GOL|Gabriel Brazão|25|Brasil|77
+GOL|Diógenes|25|Brasil|1
+GOL|João Paulo|31|Brasil|-
+GOL|Rodrigo Falcão|21|Brasil|-
+DEF|Vinicius Lira|18|Brasil|3
+DEF|Luan Peres|32|Brasil|14
+DEF|Igor Vinícius|29|Brasil|18
+DEF|Gonzalo Escobar|29|Argentina|31
+DEF|Gabriel Menino|25|Brasil|25
+DEF|Alexis Duarte|26|Paraguai|-
+DEF|João Alencar|19|Brasil|-
+DEF|João Ananias|19|Brasil|-
+DEF|Lucas Veríssimo|31|Brasil|-
+MEI|João Schmidt|33|Brasil|5
+MEI|Willian Arão|34|Brasil|15
+MEI|Thaciano|31|Brasil|16
+MEI|Miguelito|22|Bolívia|30
+MEI|Neymar|34|Brasil|-
+MEI|Christian Oliva|30|Uruguai|-
+MEI|Gabriel Bontempo|21|Brasil|-
+MEI|Gustavo Henrique|21|Brasil|-
+MEI|Pepê Fermino|18|Brasil|-
+ATA|Gabriel Barbosa|30|Brasil|9
+ATA|Gustavo Caballero|24|Paraguai|17
+ATA|Álvaro Barreal|26|Argentina|22
+ATA|Benjamín Rollheiser|26|Argentina|32
+ATA|Andrey|24|Brasil|-
+ATA|Enzo Boer|21|Brasil|-
+ATA|Mateus Xavier|19|Brasil|-
+ATA|Moisés|30|Brasil|-
+ATA|Robinho Júnior|18|Brasil|7
+ATA|Rony|31|Brasil|-
+@CLUB palmeiras|Palmeiras|placardefutebol.com.br/time/palmeiras/jogadores; escalação Vasco x Palmeiras 08/11/2026
+GOL|Carlos Miguel|28|Brasil|1
+GOL|Marcelo Lomba|39|Brasil|14
+GOL|Bruno Bertinato|28|Brasil|-
+DEF|Alexander Barboza|31|Argentina|2
+DEF|Bruno Fuchs|27|Brasil|3
+DEF|Agustín Giay|22|Argentina|4
+DEF|Khellven|25|Brasil|12
+DEF|Gustavo Gómez|33|Paraguai|15
+DEF|Joaquín Piquerez|28|Uruguai|22
+DEF|Murilo|29|Brasil|26
+DEF|Luis Benedetti|20|Brasil|43
+DEF|Arthur Gabriel|21|Brasil|56
+DEF|Jefté|22|Brasil|-
+MEI|Andreas Pereira|30|Bélgica|8
+MEI|Marlon Freitas|31|Brasil|17
+MEI|Mauricio|25|Brasil|18
+MEI|Lucas Evangelista|31|Brasil|30
+MEI|Emiliano Martínez|27|Uruguai|32
+MEI|Erick Belé|19|Brasil|-
+MEI|Larson|21|Brasil|48
+MEI|Luis Pacheco|18|Brasil|50
+ATA|Felipe Anderson|33|Brasil|7
+ATA|Vitor Roque|21|Brasil|9
+ATA|Jhon Arias|29|Colômbia|11
+ATA|Ramón Sosa|27|Paraguai|19
+ATA|Flaco López|25|Argentina|42
+ATA|Paulinho|26|Brasil|-
+@CLUB saopaulo|São Paulo|placardefutebol.com.br/time/sao-paulo/jogadores
+GOL|Rafael|37|Brasil|-
+GOL|Carlos Coronel|29|Brasil|-
+GOL|Felipe Preis|20|Brasil|-
+GOL|João Pedro|20|Brasil|-
+GOL|Young|24|Brasil|-
+DEF|Robert Arboleda|35|Equador|-
+DEF|Rafael Tolói|36|Brasil|-
+DEF|Sabino|30|Brasil|-
+DEF|Domingos Duarte|31|Portugal|-
+DEF|Cédric Soares|35|Alemanha|-
+DEF|Enzo Díaz|30|Argentina|-
+DEF|Wendell|33|Brasil|-
+DEF|Lucas Ramon|32|Brasil|-
+DEF|Aurélio Buta|29|Angola|-
+DEF|Iago|29|Brasil|-
+DEF|Igor Felisberto|19|Brasil|-
+DEF|Isac|20|Brasil|-
+DEF|Luis Osorio|20|Brasil|-
+DEF|Matheus Belém|23|Brasil|-
+DEF|Nicolas|19|Suíça|-
+DEF|Pedro Lima|20|Brasil|-
+MEI|Pablo Maia|24|Brasil|-
+MEI|Marcos Antônio|26|Brasil|-
+MEI|Damián Bobadilla|25|Paraguai|-
+MEI|Danielzinho|32|Brasil|-
+MEI|Cauly|31|Brasil|-
+MEI|Newton|26|Brasil|-
+MEI|Djhordney|19|Brasil|-
+MEI|Pedro Ferreira|19|Brasil|-
+ATA|Lucas Moura|34|Brasil|-
+ATA|Luciano|33|Brasil|-
+ATA|Jonathan Calleri|33|Argentina|-
+ATA|Ferreirinha|28|Brasil|-
+ATA|André Silva|29|Brasil|-
+ATA|Artur|28|Brasil|-
+ATA|Victor Sá|32|Brasil|-
+ATA|Gustavo Santana|21|Brasil|-
+ATA|Lucca|19|Brasil|-
+ATA|Ryan Francisco|19|Brasil|-
+ATA|Tetê|19|Brasil|-
+@CLUB coritiba|Coritiba|placardefutebol.com.br/time/coritiba/jogadores
+GOL|Pedro Morisco|22|Brasil|-
+GOL|Benassi|22|Brasil|-
+GOL|Keiller|30|Brasil|-
+GOL|Pedro Rangel|26|Brasil|-
+DEF|Bruno Melo|34|Brasil|-
+DEF|Fabricio Bustos|30|Argentina|-
+DEF|Felipe Jonatan|28|Brasil|-
+DEF|Jacy|29|Brasil|-
+DEF|Lucas Taverna|19|Brasil|-
+DEF|Maicon|38|Brasil|-
+DEF|Rodrigo Gelado|23|Brasil|-
+DEF|Rodrigo Moledo|39|Brasil|-
+DEF|Thiago Santos|37|Brasil|-
+DEF|Tiago Cóser|22|Brasil|-
+DEF|Tinga|33|Brasil|-
+MEI|Sebastián Gómez|30|Colômbia|-
+MEI|Josué|36|Portugal|-
+MEI|Nicolás Fonseca|28|Itália|-
+MEI|Richard|32|Brasil|-
+MEI|Gustavo|24|Brasil|-
+MEI|Tissi|19|Brasil|-
+MEI|Vini Paulista|25|Brasil|-
+ATA|Breno Lopes|30|Brasil|-
+ATA|Pedro Rocha|32|Brasil|-
+ATA|Brian Ocampo|27|Uruguai|-
+ATA|Fabinho|26|Brasil|-
+ATA|Joaquín Lavega|21|Uruguai|-
+ATA|Keno|37|Brasil|-
+ATA|Lucas Ronier|21|Brasil|-
+ATA|Paulo Roberto|21|Brasil|-
+ATA|Renato Marques|22|Brasil|-
+ATA|Rodrigo Rodrigues|30|Brasil|-
+ATA|Éberth|23|Brasil|-
+@CLUB fluminense|Fluminense|placardefutebol.com.br/time/fluminense/jogadores; números: escalação Cruzeiro x Fluminense 31/05/2026
+GOL|Fábio|45|Brasil|1
+GOL|Vitor Eudes|27|Brasil|98
+GOL|Marcelo Pitaluga|23|Brasil|-
+DEF|Samuel Xavier|36|Brasil|2
+DEF|Jemmes|26|Brasil|3
+DEF|Renê|33|Brasil|6
+DEF|Guilherme Arana|29|Brasil|13
+DEF|Igor Rabello|31|Brasil|21
+DEF|Guga|27|Brasil|23
+DEF|Julián Millán|28|Colômbia|29
+DEF|Thiago Silva|41|Brasil|-
+DEF|Freytes|26|Argentina|-
+DEF|Ignácio|29|Brasil|-
+DEF|Jhonny|24|Brasil|-
+DEF|Julio Fidelis|19|Brasil|-
+MEI|Martinelli|24|Brasil|8
+MEI|Jefferson Savarino|29|Venezuela|11
+MEI|Luciano Acosta|32|Argentina|32
+MEI|Hércules|25|Brasil|35
+MEI|Otávio|32|Brasil|94
+MEI|Alisson|33|Brasil|-
+MEI|David Terans|32|Uruguai|-
+MEI|Ganso|36|Brasil|-
+MEI|Nonato|28|Brasil|-
+MEI|Yago|25|Brasil|-
+ATA|Yeferson Soteldo|29|Venezuela|7
+ATA|John Kennedy|24|Brasil|9
+ATA|Germán Cano|38|Argentina|14
+ATA|Riquelme|19|Brasil|28
+ATA|Kevin Serna|28|Colômbia|90
+ATA|Agustín Canobbio|27|Itália|-
+ATA|Hulk|40|Brasil|-
+ATA|Matheus Reis|19|Brasil|-
+ATA|Rodrigo Castillo|27|Argentina|-
+@CLUB botafogo|Botafogo|placardefutebol.com.br/time/botafogo/jogadores
+GOL|Gabriel Batista|28|Brasil|-
+GOL|Cristhian Loor|20|Equador|-
+GOL|Warleson|30|Brasil|-
+DEF|Alex Telles|33|Brasil|-
+DEF|Anthony|21|Brasil|-
+DEF|Arthur Chaves|25|Brasil|-
+DEF|Gabriel Justino|20|Brasil|-
+DEF|Jhoan Hernández|20|Colômbia|-
+DEF|Kadu Santos|21|Brasil|-
+DEF|Kaio|31|Brasil|-
+DEF|Kawan|23|Brasil|-
+DEF|Lucas Monzón|25|Brasil|-
+DEF|Marçal|37|Brasil|-
+DEF|Mateo Ponte|23|Uruguai|-
+DEF|Nahuel Ferraresi|27|Venezuela|-
+DEF|Paulinho|31|Brasil|-
+DEF|Vitinho|27|Brasil|-
+MEI|Danilo|25|Brasil|-
+MEI|Allan|35|Brasil|-
+MEI|Cristian Medina|24|Argentina|-
+MEI|Domingos Andrade|23|Angola|-
+MEI|Edenilson|36|Brasil|-
+MEI|Huguinho|19|Brasil|-
+MEI|Jordan Barrera|20|Colômbia|-
+MEI|Wallace Davi|19|Brasil|-
+ATA|Arthur Cabral|28|Brasil|-
+ATA|Danilo Santos|27|Brasil|-
+ATA|Hakim Ziyech|33|Holanda|-
+ATA|Júnior Santos|32|Brasil|-
+ATA|Kadir Barria|19|Panamá|-
+ATA|Kauan Toledo|20|Brasil|-
+ATA|Lucas Emanuel|17|Brasil|-
+ATA|Lucas Villalba|25|Uruguai|-
+ATA|Matheus Martins|23|Brasil|-
+ATA|Tiquinho Soares|35|Brasil|-
+ATA|Álvaro Montoro|19|Argentina|-
+@CLUB gremio|Grêmio|placardefutebol.com.br/time/gremio/jogadores
+GOL|Weverton|38|Brasil|-
+GOL|Gabriel Grando|26|Brasil|-
+GOL|Gabriel Menegon|17|Brasil|-
+GOL|Thiago Beltrame|23|Brasil|-
+DEF|Walter Kannemann|35|Argentina|-
+DEF|Fabián Balbuena|34|Paraguai|-
+DEF|Gustavo Martins|23|Brasil|-
+DEF|Marcos Rocha|37|Brasil|-
+DEF|Marlon|29|Brasil|-
+DEF|Caio Paulista|28|Brasil|-
+DEF|Cristian Pavón|30|Argentina|-
+DEF|João Pedro|29|Brasil|-
+DEF|Luis Eduardo|18|Brasil|-
+DEF|Pedro Gabriel|19|Brasil|-
+DEF|Wagner Leonardo|27|Brasil|-
+DEF|Wallace|21|Brasil|-
+MEI|Mathías Villasanti|29|Paraguai|-
+MEI|Dodi|30|Brasil|-
+MEI|Erick Noriega|24|Japão|-
+MEI|Gabriel Mec|18|Brasil|-
+MEI|Juan Nardoni|24|Argentina|-
+MEI|Leonel Pérez|21|Argentina|-
+MEI|Miguel Monsalve|22|Colômbia|-
+MEI|Riquelme|19|Brasil|-
+MEI|Tiaguinho|18|Brasil|-
+ATA|Carlos Vinícius|31|Brasil|-
+ATA|Tetê|26|Brasil|-
+ATA|Francis Amuzu|26|Gana|-
+ATA|José Enamorado|27|Colômbia|-
+ATA|Martin Braithwaite|35|Dinamarca|-
+ATA|Matheus Nascimento|22|Brasil|-
+ATA|Roger|18|Brasil|-
+ATA|Willian|37|Brasil|-
+@CLUB cruzeiro|Cruzeiro|placardefutebol.com.br/time/cruzeiro/jogadores; números: escalação Cruzeiro x Fluminense 31/05/2026
+GOL|Cássio|39|Brasil|-
+GOL|Otávio Costa|20|Brasil|81
+GOL|Léo Aragão|24|Brasil|-
+DEF|Kauã Moraes|20|Brasil|2
+DEF|Fabrício Bruno|30|Brasil|15
+DEF|Fagner|37|Brasil|23
+DEF|Lucas Villalba|32|Argentina|25
+DEF|Jonathan Jesus|22|Brasil|34
+DEF|João Marcelo|26|Brasil|43
+DEF|Gabriel Rojas|29|Argentina|-
+DEF|Matías Viña|28|Uruguai|-
+DEF|William|31|Brasil|-
+MEI|Matheus Henrique|28|Brasil|8
+MEI|Matheus Pereira|30|Brasil|10
+MEI|Gerson|29|Brasil|11
+MEI|Lucas Silva|33|Brasil|16
+MEI|Lucas Romero|32|Argentina|29
+MEI|Fabrizio Peralta|24|Paraguai|-
+MEI|Felipe Morais|18|Brasil|-
+MEI|Zé Lucas|18|Brasil|-
+ATA|Marquinhos|23|Brasil|7
+ATA|Bruno Rodrigues|29|Brasil|9
+ATA|Luis Sinisterra|27|Colômbia|17
+ATA|Neyser Villareal|21|Colômbia|22
+ATA|Kaique Kenji|20|Japão|70
+ATA|Wanderson|32|Brasil|94
+ATA|Keny Arroyo|20|Equador|99
+ATA|Kaio Jorge|24|Brasil|-
+ATA|Gabriel Pec|25|Brasil|-
+ATA|João Costa|21|Brasil|-
+ATA|Luciano Rodríguez|23|Uruguai|-
+ATA|Wesley|21|Brasil|-
+@CLUB bragantino|RB Bragantino|placardefutebol.com.br/time/bragantino/jogadores; números: escalação Bragantino x Atlético-MG (Sul-Americana) 12/08/2026
+GOL|Cleiton|29|Brasil|1
+GOL|Tiago Volpi|35|Brasil|-
+GOL|Fabrício|26|Brasil|-
+GOL|Fernando Costa|22|Brasil|-
+GOL|Gustavo|21|Brasil|-
+DEF|Guzmán Rodríguez|26|Uruguai|2
+DEF|Eduardo|28|Brasil|3
+DEF|Alix|26|Brasil|4
+DEF|Pedro Henrique|30|Brasil|14
+DEF|Gustavo Marques|24|Brasil|16
+DEF|Agustín Sant'Anna|28|Uruguai|23
+DEF|Juninho Capixaba|29|Brasil|29
+DEF|Andrés Hurtado|24|Equador|34
+DEF|Cauê Nascimento|19|Brasil|-
+DEF|Ryan Augusto|18|Brasil|-
+DEF|Vanderlan|23|Brasil|-
+MEI|Fabinho|24|Brasil|5
+MEI|Gabriel|34|Brasil|6
+MEI|Eric Ramires|26|Brasil|7
+MEI|Ignacio Sosa|22|Uruguai|15
+MEI|Rodriguinho|22|Brasil|20
+MEI|Gustavo Neves|22|Brasil|22
+MEI|Marcelinho Braz|22|Brasil|57
+MEI|Bruno|23|Brasil|-
+MEI|João Neto|23|Brasil|-
+MEI|Matheus Fernandes|28|Brasil|-
+MEI|Praxedes|24|Brasil|-
+ATA|Eduardo Sasha|34|Brasil|8
+ATA|Isidro Pitta|27|Paraguai|9
+ATA|Vinicinho|22|Brasil|17
+ATA|Lucas Barbosa|25|Brasil|21
+ATA|José Herrera|23|Argentina|32
+ATA|Davi Gomes|21|Brasil|-
+ATA|Fernando|27|Brasil|-
+ATA|Gabriel Novaes|27|Brasil|-
+ATA|Henry Mosquera|24|Colômbia|-
+ATA|Ignacio Laquintana|27|Uruguai|-
+ATA|Kawê|24|Brasil|-
+@CLUB athleticopr|Athletico-PR|placardefutebol.com.br/time/athletico-pr/jogadores
+GOL|Mycael|22|Brasil|-
+GOL|Santos|36|Brasil|-
+GOL|Matheus Soares|21|Brasil|-
+DEF|Lucas Esquivel|24|Argentina|-
+DEF|Arthur Dias|19|Brasil|-
+DEF|Carlos Terán|25|Colômbia|-
+DEF|Claudio|20|Brasil|-
+DEF|Dantas|22|Brasil|-
+DEF|Gastón Benavídez|30|Argentina|-
+DEF|Gilberto|33|Brasil|-
+DEF|Gilberto Junior|21|Brasil|-
+DEF|Juan Aguirre|30|Colômbia|-
+DEF|Léo|30|Brasil|-
+DEF|Léo Derik|21|Brasil|-
+MEI|Luiz Gustavo|39|Brasil|-
+MEI|João Cruz|20|Brasil|-
+MEI|Alejandro García|25|Colômbia|-
+MEI|Bruno Zapelli|24|Argentina|-
+MEI|Chiqueti|21|Brasil|-
+MEI|Dudu|20|Brasil|-
+MEI|Felipinho|24|Brasil|-
+MEI|Juan Portilla|28|Colômbia|-
+MEI|Jádson|33|Brasil|-
+ATA|Kevin Viveros|26|Colômbia|-
+ATA|Isaac|22|Brasil|-
+ATA|Jorge Rivaldo|22|Colômbia|-
+ATA|Kerwin Vargas|24|Colômbia|-
+ATA|Leozinho|27|Brasil|-
+ATA|Renan Peixoto|26|Brasil|-
+ATA|Renan Viana|23|Brasil|-
+ATA|Stiven Mendoza|34|Colômbia|-
+@CLUB atleticomg|Atlético-MG|placardefutebol.com.br/time/atletico-mg/jogadores; números: escalação Bragantino x Atlético-MG 12/08/2026
+GOL|Gabriel Delfim|24|Brasil|1
+GOL|Everson|36|Brasil|22
+GOL|Pedro|20|Brasil|-
+GOL|Robert|21|Brasil|-
+DEF|Natanael|24|Brasil|2
+DEF|Ruan|27|Brasil|4
+DEF|Renan Lodi|28|Brasil|6
+DEF|Lyanco|29|Brasil|13
+DEF|Vitor Hugo|35|Brasil|14
+DEF|Angelo Preciado|28|Equador|23
+DEF|Kauã Pascini|18|Brasil|36
+DEF|Léo Duarte|30|Brasil|-
+DEF|Vitão|18|Brasil|-
+MEI|Alexsander|23|Brasil|5
+MEI|Maycon|29|Brasil|8
+MEI|Igor Gomes|27|Brasil|17
+MEI|Reinier|24|Brasil|19
+MEI|Alan Franco|28|Equador|21
+MEI|Tomás Pérez|21|Argentina|25
+MEI|Victor Hugo|22|Brasil|30
+MEI|Mamady Cissé|19|Guiné|39
+MEI|Fred|33|Brasil|-
+MEI|Gustavo Scarpa|32|Brasil|-
+MEI|Kevin Castaño|26|Colômbia|-
+MEI|Índio|18|Brasil|-
+ATA|Mateo Cassierra|29|Colômbia|9
+ATA|Bernard|34|Brasil|11
+ATA|Alan Minda|23|Equador|27
+ATA|Tomás Cuello|26|Argentina|28
+ATA|Dudu|34|Brasil|92
+ATA|Cauã Soares|18|Brasil|-
+ATA|Thiago Borbas|24|Uruguai|-
+@CLUB bahia|Bahia|placardefutebol.com.br/time/bahia/jogadores; transferências 2026 (Guido Herrera, Marco Moreno, Alejo Veliz chegaram em jul/2026)
+GOL|Guido Herrera|34|Argentina|-
+GOL|Ronaldo|30|Brasil|-
+GOL|Léo Vieira|36|Brasil|-
+GOL|Victor|20|Brasil|-
+DEF|David Duarte|31|Brasil|-
+DEF|Kanu|29|Brasil|-
+DEF|Luciano|27|Brasil|-
+DEF|Marco Moreno|25|Espanha|-
+DEF|Marcos Victor|24|Brasil|-
+DEF|Román Gómez|22|Argentina|-
+DEF|Zé Guilherme|21|Brasil|-
+DEF|Fredi Gomes|20|Brasil|-
+DEF|Luiz Gustavo|20|Brasil|-
+MEI|Everton Ribeiro|37|Brasil|-
+MEI|Jean Lucas|-|Brasil|-
+MEI|Caio Alexandre|27|Brasil|-
+MEI|Nicolás Acevedo|27|Uruguai|-
+MEI|Rodrigo Nestor|26|Brasil|-
+MEI|Erick|29|Brasil|-
+MEI|Lautaro López|21|Argentina|-
+MEI|David Martins|19|Brasil|-
+MEI|Roger|19|Brasil|-
+ATA|Willian José|35|Brasil|-
+ATA|Erick Pulga|26|Brasil|-
+ATA|Everaldo|35|Brasil|-
+ATA|Michel Araújo|30|Uruguai|-
+ATA|Cristian Olivera|24|Uruguai|-
+ATA|Alejo Veliz|23|Argentina|-
+ATA|Mateo Sanabria|22|Argentina|-
+ATA|Ademir|-|Brasil|-
+ATA|Dell|18|Brasil|-
+ATA|Kauê Furquim|17|Brasil|-
+ATA|Ruan Pablo|18|Brasil|-
+@CLUB athletic|Athletic|placardefutebol.com.br/time/athletic-club-mg/jogadores (Athletic Club, São João del-Rei/MG)
+GOL|Luan Polli|33|Brasil|-
+GOL|Eduardo|22|Brasil|-
+GOL|Glauco|31|Brasil|-
+GOL|Tony Batista|34|Brasil|-
+DEF|Diogo Batista|23|Brasil|-
+DEF|Douglas Pelé|27|Brasil|-
+DEF|Enzo|24|Brasil|-
+DEF|Felipe Vieira|21|Brasil|-
+DEF|Jhan Torres|25|Colômbia|-
+DEF|Jhonatan|27|Brasil|-
+DEF|Lucas Belezi|23|Brasil|-
+DEF|Marcelo Henrique|21|Brasil|-
+DEF|Philipe Sampaio|31|Brasil|-
+DEF|Sidimar|34|Brasil|-
+DEF|Zeca|32|Brasil|-
+MEI|João Miguel|22|Brasil|-
+MEI|Alexandre Pena|21|Brasil|-
+MEI|Assis|24|Brasil|-
+MEI|Fabrício Isidoro|34|Brasil|-
+MEI|Felipe Negrucci|22|Brasil|-
+MEI|Gian Cabezas|23|Colômbia|-
+MEI|Gustavinho|25|Brasil|-
+MEI|Jota|22|Brasil|-
+MEI|Kauan|21|Brasil|-
+MEI|Kauan Lindes|22|Brasil|-
+MEI|Pedro Oliveira|28|Brasil|-
+MEI|Yago Santos|23|Brasil|-
+ATA|Dixon Vera|23|Equador|-
+ATA|Bruninho|-|Brasil|-
+ATA|Carlinhos|29|Brasil|-
+ATA|Gustavão|21|Brasil|-
+ATA|Max|24|Brasil|-
+ATA|Ronaldo Tavares|29|Portugal|-
+ATA|Wilinton Aponzá|26|Colômbia|-
+ATA|Yarlen|20|Brasil|-
+@CLUB internacional|Internacional|SEM página de elenco encontrada; atletas confirmados nas escalações publicadas em placardefutebol.com.br: Mirassol x Internacional 16/10/2026 e Internacional x Mirassol 19/04/2026. POSIÇÕES ESTIMADAS (as escalações não informam posição). Elenco parcial.
+GOL|Matheus Cunha|-|Brasil|23
+GOL|Kauan|-|Brasil|22
+GOL|Anthoni|-|Brasil|12
+DEF|Bruno Gomes|-|Brasil|15
+DEF|Juninho|-|Brasil|18
+DEF|Gabriel Mercado|-|Argentina|25
+DEF|Félix Torres|-|Equador|4
+DEF|Victor Gabriel|-|Brasil|41
+DEF|Braian Aguirre|-|Argentina|35
+DEF|Alexandro Bernabei|-|Argentina|26
+DEF|Matheus Bahia|-|Brasil|6
+MEI|Rodrigo Villagra|-|Argentina|5
+MEI|Thiago Maia|-|Brasil|29
+MEI|Bruno Henrique|-|Brasil|8
+MEI|Alan Patrick|-|Brasil|10
+MEI|Paulinho Paula|-|Brasil|27
+MEI|Ronaldo|-|Brasil|16
+MEI|Calebe|-|Brasil|30
+ATA|Vitinho|-|Brasil|28
+ATA|Alerrandro|-|Brasil|9
+ATA|Johan Carbonero|-|Colômbia|7
+ATA|Niclas Eliasson|-|Suécia|17
+ATA|João Bezerra|-|Brasil|49
+ATA|Rafael Borré|-|Colômbia|19
+ATA|Kayky|-|Brasil|11
+@CLUB mirassol|Mirassol|placardefutebol.com.br/time/mirassol/jogadores; números: escalação Mirassol x Internacional 16/10/2026
+GOL|Walter|38|Brasil|22
+GOL|Alex Muralha|36|Brasil|23
+GOL|Thomazella|36|Brasil|-
+GOL|Georgemy|31|Brasil|-
+DEF|Lucas Oliveira|30|Brasil|2
+DEF|Willian Machado|29|Brasil|3
+DEF|Reinaldo|37|Brasil|6
+DEF|Daniel Borges|33|Brasil|20
+DEF|Igor Formiga|27|Brasil|32
+DEF|João Victor|29|Brasil|34
+DEF|Gabriel|22|Brasil|44
+DEF|Elias|27|Brasil|-
+DEF|Victor Luís|33|Brasil|12
+DEF|Wesley Santos|22|Brasil|-
+MEI|Japa|22|Brasil|5
+MEI|Shaylon|29|Brasil|7
+MEI|Chico Kim|35|Brasil|10
+MEI|Neto Moura|30|Brasil|25
+MEI|Denilson|25|Brasil|27
+MEI|Eduardo|36|Brasil|33
+MEI|William Alves|29|Brasil|80
+MEI|José Aldo|28|Brasil|21
+MEI|Gustavo Cazonatti|30|Brasil|-
+ATA|André Luis|32|Brasil|9
+ATA|Fernandinho|29|Brasil|17
+ATA|Bruno Santos|29|Brasil|30
+ATA|Alesson|27|Brasil|77
+ATA|Edson Carioca|29|Brasil|95
+ATA|Carlos Eduardo|29|Brasil|96
+ATA|Zé Roberto|33|Brasil|99
+ATA|Gustavo Silva|29|Brasil|-
+ATA|Luiz Filipe|25|Brasil|-
+ATA|Negueba|26|Brasil|-
+@CLUB vitoria|Vitória|placardefutebol.com.br/time/vitoria/jogadores
+GOL|Lucas Arcanjo|28|Brasil|-
+GOL|Fintelman|25|Brasil|-
+GOL|Yuri Sena|25|Brasil|-
+DEF|Cacá|27|Brasil|-
+DEF|Camutanga|33|Brasil|-
+DEF|Darlan Silva Dutra|23|Brasil|-
+DEF|Edenilson|21|Brasil|-
+DEF|Edu Ribeiro|26|Brasil|-
+DEF|Emanuel Brítez|34|Argentina|-
+DEF|F. de Souza Silva|26|Brasil|-
+DEF|Jamerson|28|Brasil|-
+DEF|Luan Cândido|25|Brasil|-
+DEF|Mateusinho|28|Brasil|-
+DEF|Nathan Mendes|24|Brasil|-
+DEF|Ramon|25|Brasil|-
+DEF|Riccieli|28|Brasil|-
+DEF|Zé Marcos|28|Brasil|-
+MEI|Tomás Pochettino|30|Argentina|-
+MEI|Baralhas|28|Brasil|-
+MEI|Caíque Gonçalves|31|Brasil|-
+MEI|Dudu|27|Brasil|-
+MEI|Emmanuel Martínez|32|Argentina|-
+MEI|Ismael|27|Portugal|-
+MEI|Matheuzinho|29|Brasil|-
+MEI|Walace|31|Brasil|-
+MEI|Zé Vitor|26|Brasil|-
+ATA|Renato Kayzer|30|Brasil|-
+ATA|Marinho|36|Brasil|-
+ATA|Alex Bruno|-|Brasil|-
+ATA|Anderson Pato|24|Brasil|-
+ATA|Diego Tarzia|23|Argentina|-
+ATA|Erick|28|Brasil|-
+ATA|Fabri|26|Brasil|-
+ATA|Ignacio Laquintana|27|Uruguai|-
+ATA|Lucas Silva|27|Brasil|-
+ATA|Osvaldo|39|Brasil|-
+ATA|Renê|23|Brasil|-
+@CLUB remo|Remo|placardefutebol.com.br/time/remo/jogadores; números: escalação Corinthians x Remo 23/07/2026
+GOL|Marcelo Rangel|38|Brasil|88
+GOL|Ygor Vinhas|32|Brasil|94
+GOL|Ivan|29|Brasil|97
+DEF|Matheus Alexandre|27|Brasil|2
+DEF|Matheus Felipe|27|Brasil|4
+DEF|Léo|28|Brasil|5
+DEF|Marllon|34|Brasil|13
+DEF|Zé Ivaldo|29|Brasil|27
+DEF|Mayk|27|Brasil|77
+DEF|Marcelinho|28|Brasil|79
+DEF|Cristian Tassano|30|Uruguai|-
+DEF|João Lucas|28|Brasil|-
+DEF|Marlon|32|Brasil|-
+DEF|Tchamba|28|Camarões|-
+MEI|Patrick|34|Brasil|8
+MEI|Leonel Picco|28|Argentina|14
+MEI|Vitor Bueno|32|Brasil|15
+MEI|David Braga|24|Brasil|26
+MEI|Zé Welison|31|Brasil|28
+MEI|Zé Ricardo|27|Brasil|55
+MEI|Edson Fernando|28|Brasil|-
+MEI|Franco Catarozzi|26|Uruguai|-
+ATA|Jajá|27|Brasil|7
+ATA|Gabriel Poveda|28|Brasil|9
+ATA|Jáderson|26|Brasil|10
+ATA|Alef Manga|31|Brasil|11
+ATA|Gabriel Taliari|29|Brasil|19
+ATA|Yago Pikachu|34|Brasil|22
+ATA|P. da Costa Evangelista Junior|20|Brasil|61
+ATA|Antonio Galeano|26|Paraguai|-
+ATA|Eduardo Melo|25|Brasil|-
+@CLUB ceara|Ceará|placardefutebol.com.br/time/ceara/jogadores
+GOL|Matheus Nogueira|28|Brasil|-
+GOL|Richard|35|Brasil|-
+GOL|Jorge|25|Brasil|-
+DEF|Bryan Borges|30|Brasil|-
+DEF|Júlio|22|Brasil|-
+DEF|Luiz Otávio|33|Brasil|-
+DEF|Pedro Gilmar|20|Brasil|-
+DEF|Rafael Ramos|31|Portugal|-
+DEF|Sánchez|30|Brasil|-
+DEF|Sávio|31|Brasil|-
+DEF|Thalisson|24|Brasil|-
+DEF|Éder|31|Brasil|-
+MEI|Lucas Mugni|34|Argentina|-
+MEI|Vina|35|Brasil|-
+MEI|Matheus Araújo|24|Brasil|-
+MEI|Giovanni Pavani|29|Brasil|-
+MEI|João Gabriel|20|Brasil|-
+MEI|Melk|20|Brasil|-
+MEI|Richardson|35|Brasil|-
+MEI|Zanocelo|25|Brasil|-
+ATA|Renzo López|32|Uruguai|-
+ATA|Giulio Gabriel|21|Brasil|-
+ATA|Gustavo Prado|21|Brasil|-
+ATA|Kauã|20|Brasil|-
+ATA|Lenny Lobato|25|Brasil|-
+ATA|Lucca|23|Brasil|-
+ATA|Nicolás Ferreira|24|Uruguai|-
+ATA|Wendel|26|Brasil|-
+@CLUB santacruz|Santa Cruz|placardefutebol.com.br/time/santa-cruz/jogadores
+GOL|Thiago|30|Brasil|-
+GOL|Felipe Alves|37|Brasil|-
+GOL|Rokenedy|23|Brasil|-
+DEF|Thiago Ennes|30|Brasil|-
+DEF|Alex Ruan|33|Brasil|-
+DEF|Edson Miranda|27|Brasil|-
+DEF|Eurico|32|Brasil|-
+DEF|Jeferson Bahia|33|Brasil|-
+DEF|Willian Alves|39|Brasil|-
+DEF|Zé Mário|34|Brasil|-
+MEI|Andrey|28|Brasil|-
+MEI|Fabinho|39|Brasil|-
+MEI|Leo Costa|30|Brasil|-
+MEI|Patrick Allan|31|Brasil|-
+MEI|Pedro Favela|26|Brasil|-
+MEI|Régis|33|Brasil|-
+MEI|Silva|30|Brasil|-
+MEI|Wagner|33|Brasil|-
+ATA|Everaldo|31|Brasil|-
+ATA|Eron|27|Brasil|-
+ATA|A. Nahuelpán Osten|38|Argentina|-
+ATA|Marquinhos|23|Brasil|-
+ATA|Quirino|32|Brasil|-
+ATA|Renato|36|Brasil|-
+ATA|Robinho|31|Brasil|-
+ATA|Ronald|29|Brasil|-
+ATA|Tiago Marques|38|Brasil|-
+@CLUB criciuma|Criciúma|placardefutebol.com.br/time/criciuma/jogadores; transferências 2026 (Erick e Kauã Moroso saíram para o Caravaggio — removidos; Rômulo chegou em 09/2026)
+GOL|Airton|32|Brasil|-
+GOL|Alisson|31|Brasil|-
+GOL|Pedro|21|Brasil|-
+DEF|Marcelo Hermes|31|Brasil|-
+DEF|Bruno Alves|35|Brasil|-
+DEF|César Martins|33|Brasil|-
+DEF|Hiago|21|Brasil|-
+DEF|Luciano Castán|37|Brasil|-
+DEF|Marcinho|30|Brasil|-
+DEF|Rodrigo|39|Brasil|-
+DEF|Ruan Carvalho|20|Brasil|-
+DEF|Rômulo|22|Brasil|-
+DEF|Willean Lepo|29|Brasil|-
+MEI|Rómulo Otero|33|Venezuela|-
+MEI|Eduardo|29|Brasil|-
+MEI|Fellipe Mateus|35|Brasil|-
+MEI|Guilherme|27|Brasil|-
+MEI|Jean Irmer|32|Brasil|-
+MEI|Ronald|29|Brasil|-
+MEI|Thiaguinho|20|Brasil|-
+ATA|Jhonata Robert|27|Brasil|-
+ATA|Nicolas|37|Brasil|-
+ATA|Cauê|23|Brasil|-
+ATA|Diego Gonçalves|32|Brasil|-
+ATA|João Carlos|25|Brasil|-
+ATA|Romarinho|32|Brasil|-
+ATA|Waguininho|36|Brasil|-
+ATA|Yuri Jonathan|28|Brasil|-
+@CLUB paysandu|Paysandu|placardefutebol.com.br/time/paysandu/jogadores
+GOL|Gabriel Mesquita|27|Brasil|-
+GOL|Jean Drosny|32|Brasil|-
+DEF|Bruno Bispo|29|Brasil|-
+DEF|Castro|31|Brasil|-
+DEF|Edílson|31|Brasil|-
+DEF|Facundo Bonifazi|30|Uruguai|-
+DEF|Iarley|21|Brasil|-
+DEF|João Pedro Galvão|25|Brasil|-
+DEF|Lucca|23|Brasil|-
+DEF|Luciano Taboca|32|Brasil|-
+DEF|Matheus Capixaba|20|Brasil|-
+DEF|Yeferson Quintana|30|Uruguai|-
+MEI|Caio Mello|26|Brasil|-
+MEI|Marcinho|30|Brasil|-
+MEI|Pedro Henrique|18|Brasil|-
+MEI|Brian Wendell|18|Brasil|-
+MEI|Henrico|21|Brasil|-
+MEI|Kaua Hinkel|19|Brasil|-
+MEI|Lucas Cardoso|25|Brasil|-
+MEI|Thalyson|-|Brasil|-
+MEI|Tiago Índio|24|Brasil|-
+ATA|Juninho|21|Brasil|-
+ATA|Italo|29|Brasil|-
+ATA|Kleiton|27|Brasil|-
+ATA|Peu|23|Brasil|-
+ATA|Thayllon|24|Brasil|-
+@CLUB fortaleza|Fortaleza|placardefutebol.com.br/time/fortaleza/jogadores (Tomás Pochettino e Emanuel Brítez aparecem também na lista do Vitória — mantidos apenas no Vitória para evitar duplicação)
+GOL|João Ricardo|37|Brasil|-
+GOL|Brenno|27|Brasil|-
+GOL|Magrão|26|Brasil|-
+GOL|Vinícius|32|Brasil|-
+DEF|Gabriel Fuentes|29|Colômbia|-
+DEF|Kauã Rocha|19|Brasil|-
+DEF|Luan Freitas|25|Brasil|-
+DEF|Lucas Gazal|26|Brasil|-
+DEF|Maurício Júnior|25|Brasil|-
+DEF|Maílton|28|Brasil|-
+DEF|Paulinho|21|Brasil|-
+DEF|Tomás Cardona|30|Argentina|-
+MEI|Lucas Sasha|36|Brasil|-
+MEI|Lucas Crispim|31|Brasil|-
+MEI|Lucas Emanoel|19|Brasil|-
+MEI|Lucca Prior|22|Brasil|-
+MEI|Matheus Rossetto|30|Brasil|-
+MEI|Pierre|24|Brasil|-
+MEI|Rodrigo Santos|25|Brasil|-
+MEI|Ronald|23|Brasil|-
+MEI|Ryan|22|Brasil|-
+ATA|Paulo Baya|26|Brasil|-
+ATA|Luiz Fernando|29|Brasil|-
+ATA|GB|21|Brasil|-
+ATA|Juan Miritello|27|Argentina|-
+ATA|Kayke|19|Brasil|-
+ATA|Rodriguinho|23|Brasil|-
+ATA|Vitinho|25|Brasil|-
+ATA|Welliton|25|Brasil|-
+@CLUB juventude|Juventude|placardefutebol.com.br/time/juventude/jogadores; transferências 2026
+GOL|Jandrei|33|Brasil|-
+GOL|Pedro Rocha|28|Brasil|-
+GOL|Ruan Carneiro|36|Brasil|-
+GOL|Zé Henrique|21|Brasil|-
+DEF|Aderlan|36|Brasil|-
+DEF|Alan Ruschel|37|Brasil|-
+DEF|Diogo Barbosa|34|Brasil|-
+DEF|Gabriel Pinheiro|29|Brasil|-
+DEF|Marcos Paulo|23|Brasil|-
+DEF|Messias|31|Brasil|-
+DEF|Nathan|25|Brasil|-
+DEF|Patryck|23|Brasil|-
+DEF|Raí Ramos|32|Brasil|-
+DEF|Rodrigo Sam|31|Brasil|-
+DEF|Titi|38|Brasil|-
+DEF|Wadson|26|Brasil|-
+MEI|Gabriel Pires|33|Brasil|-
+MEI|Lucas Mineiro|30|Brasil|-
+MEI|Mandaca|25|Brasil|-
+MEI|Davi|21|Brasil|-
+MEI|Iba Ly|23|Senegal|-
+MEI|Luan Martins|27|Brasil|-
+MEI|Pablo Roberto|26|Brasil|-
+MEI|Ray Breno|22|Brasil|-
+MEI|Raí|24|Brasil|-
+ATA|Alisson Safira|31|Brasil|-
+ATA|Luis Amarilla|31|Paraguai|-
+ATA|Allanzinho|26|Brasil|-
+ATA|Fábio Lima|29|Brasil|-
+ATA|Juan Christian|25|Brasil|-
+ATA|Lucas Alves|24|Brasil|-
+ATA|Manuel Castro|31|Uruguai|-
+ATA|Marcos Paulo|25|Brasil|-
+ATA|Rui Mota|37|Brasil|-
+@CLUB pontepreta|Ponte Preta|placardefutebol.com.br/time/ponte-preta/jogadores; números: escalação Náutico x Ponte Preta 04/04/2026
+GOL|Diogo Silva|39|Brasil|12
+GOL|Guilherme Viana|22|Brasil|30
+DEF|Lucas Cunha|29|Brasil|3
+DEF|Diego Porfirio|26|Brasil|13
+DEF|Danilo Barcelos|34|Brasil|14
+DEF|Weverton|23|Brasil|15
+DEF|Thalys|26|Brasil|22
+DEF|Bryan Borges|29|Brasil|31
+DEF|David Braz|39|Brasil|33
+DEF|Marcio Silva|24|Brasil|44
+DEF|Diego Tavares|34|Brasil|-
+DEF|Jean Carlos|23|Brasil|-
+DEF|João Gabriel|21|Brasil|-
+DEF|Kevyson|22|Brasil|-
+DEF|Lucas Justen|22|Brasil|-
+DEF|Sergio Palacios|21|Colômbia|-
+MEI|Rodrigo Souza|38|Brasil|5
+MEI|Rodrigo Saravia|25|Uruguai|6
+MEI|André Lima|26|Brasil|8
+MEI|Elvis|35|Brasil|10
+MEI|Leonardo da Silva Gomes|29|Brasil|16
+MEI|M. Cavalcante|27|Brasil|20
+MEI|Tarik|33|Brasil|-
+ATA|William Pottker|32|Brasil|9
+ATA|Luis Phelipe|25|Brasil|11
+ATA|Jonathan Cafu|34|Brasil|19
+ATA|Rodriguinho|25|Brasil|90
+ATA|Brandão|21|Brasil|99
+ATA|Daniel Baianinho|26|Brasil|-
+ATA|David|26|Brasil|-
+@CLUB cuiaba|Cuiabá|placardefutebol.com.br/time/cuiaba/jogadores
+GOL|João Carlos|38|Brasil|-
+GOL|J. Batista|25|Brasil|-
+GOL|Marcelo Carné|36|Brasil|-
+DEF|Alan Empereur|32|Brasil|-
+DEF|Basso|29|Brasil|-
+DEF|Eric|25|Brasil|-
+DEF|Gabriel|36|Brasil|-
+DEF|Lorenzo Silva Martins|18|Brasil|-
+DEF|Luis Soares|20|Brasil|-
+DEF|Marlon|32|Brasil|-
+DEF|Nino Paraíba|40|Brasil|-
+DEF|Railan|26|Brasil|-
+DEF|Tarcísio Muniz|22|Brasil|-
+DEF|Vitor Mendes|27|Brasil|-
+MEI|Calebe Costa|22|Brasil|-
+MEI|David Miguel|19|-|-
+MEI|João Araújo|26|Portugal|-
+MEI|Luiz Otavio|29|Brasil|-
+MEI|Pepê|28|Brasil|-
+MEI|Raul|29|Brasil|-
+MEI|Weverson|22|Brasil|-
+ATA|Eliel|23|Brasil|-
+ATA|Hernandes|26|Brasil|-
+ATA|Kauan|20|Brasil|-
+ATA|Mateus Santos|27|Brasil|-
+ATA|Nathan Cruz da Silva Rosa|19|Brasil|-
+ATA|Rodrigo Rodrigues|26|Brasil|-
+ATA|Victor Hugo|21|Brasil|-
+ATA|Vinicius Peixoto|22|Brasil|-
+ATA|Yamil Asad|31|Argentina|-
+@CLUB atleticogo|Atlético-GO|placardefutebol.com.br/time/atletico-go/jogadores; artilharia Série B 2026 do mesmo site (Gustavo Coutinho, Geovany Soares — posição estimada). Matheus Ribeiro e Derek Freitas aparecem também no Náutico (mantidos no Náutico, confirmado em escalação).
+GOL|Vladimir|36|Brasil|-
+GOL|Paulo Vítor|37|Brasil|-
+GOL|Léo|23|Brasil|-
+DEF|Adriano Martins|28|Brasil|-
+DEF|Ewerthon|25|Brasil|-
+DEF|Guilherme|24|Brasil|-
+DEF|Junior Barreto|28|Paraguai|-
+DEF|Natã|24|Brasil|-
+DEF|Pedro Henrique|33|Brasil|-
+DEF|Tito|25|Brasil|-
+MEI|Leandro Vilela|30|Brasil|-
+MEI|Ariel|27|Brasil|-
+MEI|Cristiano|26|Brasil|-
+MEI|Geovane|37|Brasil|-
+MEI|Guilherme|34|Brasil|-
+MEI|Igor Henrique|34|Brasil|-
+MEI|Indio|26|Brasil|-
+ATA|Marrony|27|Brasil|-
+ATA|Gustavo Coutinho|-|Brasil|-
+ATA|Geovany Soares|-|Brasil|-
+ATA|B. de Souza|28|Brasil|-
+ATA|Jader Gentil|22|Brasil|-
+ATA|Jean Dias|35|Brasil|-
+ATA|Kevin Ramírez|32|Uruguai|-
+ATA|Vitinho|25|Brasil|-
+@CLUB goias|Goiás|placardefutebol.com.br/time/goias/jogadores
+GOL|Tadeu|34|Brasil|-
+GOL|Alejandro Acejo|37|Brasil|-
+GOL|Ezequiel Oliveira|23|Brasil|-
+DEF|Danilo Cunha|19|Brasil|-
+DEF|Djalma Silva|31|Brasil|-
+DEF|Lucas Ribeiro|27|Brasil|-
+DEF|Luisão|23|-|-
+DEF|Luiz Felipe|33|Brasil|-
+DEF|Marcos Vinícius|29|Brasil|-
+DEF|Nicolas|29|Brasil|-
+DEF|Ramon Menezes|31|Brasil|-
+DEF|Rodrigo Soares|33|Brasil|-
+MEI|Lucas Lima|36|Brasil|-
+MEI|Lourenço|29|Brasil|-
+MEI|B. da Silva|32|Brasil|-
+MEI|Brayann|28|Brasil|-
+MEI|Filipe Machado|30|Brasil|-
+MEI|Gegê|32|Brasil|-
+MEI|Guilherme Baldória|21|Brasil|-
+MEI|Jean Carlos|21|Brasil|-
+MEI|Juninho|38|Brasil|-
+MEI|Luquinhas|18|Brasil|-
+ATA|Wellington Rato|34|Brasil|-
+ATA|A.Alves|38|Brasil|-
+ATA|Cadu|22|Brasil|-
+ATA|Esli García|26|Venezuela|-
+ATA|Halerrandrio|20|Brasil|-
+ATA|Kadu|24|Brasil|-
+ATA|Pedrinho|22|Brasil|-
+@CLUB sport|Sport|placardefutebol.com.br/time/sport/jogadores (Carlos de Pena sem posição na fonte: posição estimada)
+GOL|Thiago Couto|27|Brasil|-
+GOL|Adriano|23|Brasil|-
+GOL|Brenno|27|Brasil|-
+GOL|Denis|39|Brasil|-
+DEF|Andre|29|Brasil|-
+DEF|Augusto Pucci|19|Brasil|-
+DEF|Claudinho|26|Brasil|-
+DEF|Edson Lucas|26|Brasil|-
+DEF|Habraão|-|Brasil|-
+DEF|Kayky Almeida|21|Brasil|-
+DEF|Marcelo Ajul|24|Brasil|-
+DEF|Marcelo Benevenuto|30|Brasil|-
+DEF|Matheus Miranda|23|Brasil|-
+DEF|P. de Oliveira Ferraz|21|Brasil|-
+DEF|Raí|26|Brasil|-
+MEI|Patrick de Paula|27|Brasil|-
+MEI|Kervin Andrade|21|Venezuela|-
+MEI|Fernando Sobral|31|Brasil|-
+MEI|Biel Fonseca|24|Brasil|-
+MEI|F. Ribeiro Lima|23|Brasil|-
+MEI|Juan Alano|30|Brasil|-
+MEI|Luciano|23|Brasil|-
+MEI|Murilo Rhikman|20|Brasil|-
+MEI|Willian Oliveira|33|Brasil|-
+MEI|Zé Gabriel|27|Brasil|-
+MEI|Carlos de Pena|34|Uruguai|-
+ATA|Perotti|28|Brasil|-
+ATA|Chrystian Barletta|25|Brasil|-
+ATA|Clayson|31|Brasil|-
+ATA|Diego Hernández|26|Uruguai|-
+ATA|Dudu Teodora|27|Brasil|-
+ATA|Marlon|29|Brasil|-
+ATA|Neto Pessoa|32|Brasil|-
+@CLUB nautico|Náutico|placardefutebol.com.br/time/nautico/jogadores; números: escalação Náutico x Ponte Preta 04/04/2026
+GOL|Muriel|39|Brasil|1
+GOL|Gastón Guruceaga|31|Uruguai|-
+GOL|Arthur|29|Brasil|-
+DEF|Arnaldo|34|Brasil|2
+DEF|Yuri|30|Brasil|6
+DEF|Índio|22|Brasil|13
+DEF|Matheus Ribeiro|33|Brasil|14
+DEF|Igor Fernandes|33|Brasil|23
+DEF|Mateus Silva|30|Brasil|25
+DEF|Gustavo Henrique|20|Brasil|46
+DEF|Léo Jance|21|Brasil|66
+DEF|Alemão|35|Brasil|-
+DEF|Betão|26|Brasil|-
+DEF|Luiz Felipe|28|Brasil|-
+DEF|Luiz Paulo|33|Brasil|-
+DEF|Reginaldo|33|Brasil|-
+DEF|Wanderson|31|Brasil|-
+MEI|Auremir|34|Brasil|5
+MEI|Wenderson|27|Brasil|8
+MEI|Dodô|24|Brasil|10
+MEI|Leonai|31|Brasil|19
+MEI|Vitinho|22|Brasil|22
+MEI|Ramon|28|Brasil|40
+MEI|Samuel|22|Brasil|41
+MEI|Juninho|30|Brasil|77
+ATA|Vinícius|32|Brasil|7
+ATA|Paulo Sérgio|36|Brasil|9
+ATA|Victor Andrade|30|Brasil|11
+ATA|Derek Freitas|28|Brasil|72
+ATA|Felipe Saraiva|28|Brasil|98
+ATA|Júnior Todinho|32|Brasil|-
+ATA|Felipe Cardoso|23|Brasil|-
+@CLUB americamg|América-MG|placardefutebol.com.br/time/america-mg/jogadores; escalação Novorizontino x América-MG 20/08/2026 (titulares fora da lista — Bruno Brígido, Luca Sosa, Manoel, Alex Silva, Tobias Ostchega, Barreto — com posição estimada pela ordem da escalação)
+GOL|Gustavo|33|Brasil|1
+GOL|William|28|Brasil|19
+GOL|Bruno Brígido|-|Brasil|91
+GOL|Cássio|24|Brasil|-
+GOL|Italo Brito|19|Brasil|-
+DEF|Luca Sosa|-|-|3
+DEF|Rafa Barcelos|22|Brasil|4
+DEF|Manoel|-|Brasil|26
+DEF|Dalbert|32|Brasil|29
+DEF|Ricardo Silva|33|Brasil|45
+DEF|Artur|31|Brasil|-
+DEF|Emerson Santos|31|Brasil|-
+DEF|Jhonny|24|Brasil|-
+DEF|Léo Alaba|26|Brasil|-
+DEF|Nathan Pelae|30|Brasil|-
+DEF|Paulinho|21|Brasil|-
+DEF|Samuel Alves|22|Brasil|-
+DEF|T. Santos de Jesus|20|Brasil|-
+DEF|Wesley|26|Brasil|-
+MEI|Fernando Elizari|35|Argentina|5
+MEI|Amaral|22|Brasil|8
+MEI|Yago Souza|20|Brasil|10
+MEI|Alex Silva|-|Brasil|15
+MEI|Tobias Ostchega|-|-|25
+MEI|Barreto|-|Brasil|88
+MEI|Alê|35|Brasil|-
+MEI|Eduardo Person|29|Brasil|-
+MEI|Jhonatan Junio Jesus de Lima|20|Brasil|-
+MEI|Val|29|Brasil|-
+MEI|Yago Santos|23|Brasil|-
+ATA|Willian Bigode|39|Brasil|9
+ATA|Gonzalo Mastriani|32|Uruguai|17
+ATA|Paulo Victor|25|Brasil|20
+ATA|Matías Segovia|23|Paraguai|-
+ATA|Breno|23|Brasil|-
+ATA|Everton|31|Brasil|-
+ATA|Gabriel Barros|24|Brasil|-
+ATA|Thauan|22|Brasil|-

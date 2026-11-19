@@ -1,0 +1,62 @@
+'use strict';
+/* Situações controladas das Leis do Jogo + integração regra→motor (pênalti, gol anulado, expulsão, gol contra). */
+const assert=require('node:assert/strict');
+const MD=require('./load.cjs')();
+const R=MD.Rules,E=MD.Engine,D=MD.Data,U=MD.U;
+const same=(a,b,m)=>assert.equal(JSON.stringify(a),JSON.stringify(b),m);
+let n=0;const ok=(name,fn)=>{fn();n++;console.log('  ✓',name);};
+console.log('Regras:');
+ok('Falta fora da área = tiro livre direto',()=>{const f=R.classifyFoul({x:30,z:5,offence:'trip'});assert.equal(f.restart,'direct_free_kick');assert.equal(f.inBox,false);assert.ok(f.dangerous);});
+ok('Falta dentro da área (infração direta) = pênalti',()=>{const f=R.classifyFoul({x:44,z:-6,offence:'trip'});assert.equal(f.restart,'penalty');same(f.spot,[43,0]);});
+ok('Falta na linha da área conta como dentro',()=>{assert.equal(R.classifyFoul({x:37.5,z:20.16,offence:'push'}).restart,'penalty');});
+ok('Infração indireta dentro da área não é pênalti',()=>{const f=R.classifyFoul({x:50,z:2,offence:'dangerous_play',contact:false});assert.equal(f.restart,'indirect_free_kick');assert.equal(f.spot[0],54-5.5,'cobrada sobre a linha da pequena área');});
+ok('Falta longe do gol não é perigosa',()=>{assert.equal(R.classifyFoul({x:-10,z:0,offence:'trip'}).dangerous,false);});
+ok('Impedimento: atacante à frente do penúltimo defensor e da bola, participando',()=>{assert.equal(R.isOffside({receiverX:40,ballX:20,defXs:[52,38,36,35,30],involved:true}),true);});
+ok('Mesma linha do penúltimo defensor não é impedimento',()=>{assert.equal(R.isOffside({receiverX:38,ballX:20,defXs:[52,38,36],involved:true}),false);});
+ok('No próprio campo não há impedimento',()=>{assert.equal(R.isOffside({receiverX:-2,ballX:-20,defXs:[52,-5,-6],involved:true}),false);});
+ok('Atrás da linha da bola não há impedimento',()=>{assert.equal(R.isOffside({receiverX:40,ballX:42,defXs:[52,30],involved:true}),false);});
+ok('Não participante não é punido',()=>{assert.equal(R.isOffside({receiverX:45,ballX:20,defXs:[52,30],involved:false}),false);});
+ok('Não há impedimento em lateral, tiro de meta ou escanteio',()=>{for(const r of ['throw_in','goal_kick','corner'])assert.equal(R.isOffside({receiverX:45,ballX:20,defXs:[52,30],involved:true,restart:r}),false);});
+ok('Entrada temerária = amarelo',()=>{assert.equal(R.foulCard({severity:'reckless'}).card,'yellow');});
+ok('Segundo amarelo = vermelho',()=>{const d=R.foulCard({severity:'reckless',existingYellows:1});assert.equal(d.card,'red');assert.equal(d.secondYellow,true);});
+ok('Jogo brusco grave = vermelho direto',()=>{assert.equal(R.foulCard({severity:'excessive'}).card,'red');});
+ok('DOGSO fora da área = vermelho',()=>{assert.equal(R.foulCard({severity:'careless',dogso:true,restart:'direct_free_kick'}).card,'red');});
+ok('DOGSO na área com disputa de bola = amarelo (pênalti)',()=>{assert.equal(R.foulCard({severity:'careless',dogso:true,restart:'penalty',attemptToPlayBall:true,offence:'trip'}).card,'yellow');});
+ok('DOGSO na área segurando = vermelho',()=>{assert.equal(R.foulCard({severity:'careless',dogso:true,restart:'penalty',attemptToPlayBall:false,offence:'hold'}).card,'red');});
+ok('Falta comum sem cartão',()=>{assert.equal(R.foulCard({severity:'careless'}).card,null);});
+ok('Escanteio: bola sai pela linha de fundo após toque do defensor',()=>{const o=R.ballOut({x:55,z:12,lastTouch:'def'});assert.equal(o.type,'corner');assert.equal(o.team,'att');same(o.spot,[54,34]);});
+ok('Tiro de meta: bola sai pela linha de fundo após toque do atacante',()=>{const o=R.ballOut({x:55,z:-12,lastTouch:'att'});assert.equal(o.type,'goal_kick');assert.equal(o.team,'def');});
+ok('Lateral para a equipe que não tocou por último',()=>{const o=R.ballOut({x:10,z:-35,lastTouch:'att'});assert.equal(o.type,'throw_in');assert.equal(o.team,'def');assert.equal(o.spot[1],-34);});
+ok('Bola entre as traves e abaixo do travessão = gol',()=>{assert.equal(R.ballOut({x:54.3,z:1,y:1,lastTouch:'att'}).type,'goal');});
+ok('Gol anulado por impedimento e falta de ataque',()=>{assert.equal(R.goalValid({offside:true}).valid,false);assert.equal(R.goalValid({attackerFoul:true}).valid,false);assert.equal(R.goalValid({}).valid,true);});
+ok('Lei da vantagem: segue em ataque promissor, nunca em pênalti',()=>{assert.equal(R.advantage({restart:'direct_free_kick',severity:'careless',keepsPossession:true,promising:true}),true);assert.equal(R.advantage({restart:'penalty',keepsPossession:true,promising:true}),false);assert.equal(R.advantage({restart:'direct_free_kick',severity:'excessive',keepsPossession:true,promising:true}),false);});
+ok('Acréscimos crescem com interrupções',()=>{const a=R.addedTime({},'second'),b=R.addedTime({goal:3,sub:6,card:4,penalty:1},'second');assert.ok(b>a);assert.ok(a>=120&&b<=540);});
+
+console.log('Integração com o motor:');
+const clubs=D.PRESETS.map(D.freshClub);
+function freshMatch(seed){return E.createMatch(clubs[0],clubs[1],{seed:String(seed)});}
+ok('Falta na área gera sequência de pênalti com cobrança, goleiro e desfecho',()=>{let found={goal:0,save:0,miss:0};
+ for(let s=1;s<400&&(found.goal<1||found.save<1||found.miss<1);s++){const m=freshMatch(s);m.clock=1200;const A=m.teams.home,Dt=m.teams.away;const P=new E.Play(m,A,Dt,'central');
+  const att=A.players[9],def=Dt.players[2];P.start(att,[38,0]);const before={...m.score};P.foul(def,att,[45,2],'stand');assert.equal(P.outcome,'penalty');
+  const ev=E.finish(m,P,true);assert.ok(ev,'pênalti sempre vira lance 3D');const pen=ev.beats.find(b=>b.k==='penalty');assert.ok(pen);assert.ok(ev.beats.some(b=>b.k==='point_spot'));
+  const scored=m.score.home-before.home;
+  if(pen.outcome==='goal'||pen.rebound?.outcome==='goal'){assert.equal(scored,1);found.goal++;}else if(pen.outcome==='save'){assert.equal(scored,0);assert.equal(ev.kind,'penalty_miss');found.save++;}else{assert.equal(scored,0);found.miss++;}}
+ assert.ok(found.goal&&found.save&&found.miss,'encontrou gol, defesa e pênalti perdido: '+JSON.stringify(found));});
+ok('Gol em impedimento é anulado e não altera o placar',()=>{const m=freshMatch(5);const A=m.teams.home,Dt=m.teams.away;const P=new E.Play(m,A,Dt,'through');const st=A.players[9];
+ P.start(A.players[7],[20,0]);P.offsideLate=st;P.add({k:'shot',by:P.ref(st),from:[44,0],type:'placed',outcome:'goal',target:[2,1],power:22,keeper:P.ref(Dt.players[0])});P.end('goal');
+ const ev=E.finish(m,P,true);assert.equal(ev.kind,'disallowed');assert.equal(m.score.home,0);assert.ok(ev.beats.some(b=>b.k==='disallow'));assert.ok(!ev.goal);});
+ok('Gol contra conta para o adversário e é registrado como gol contra',()=>{const m=freshMatch(9);const A=m.teams.home,Dt=m.teams.away;const P=new E.Play(m,A,Dt,'cross');P.start(A.players[8],[40,25]);P.ownGoal(Dt.players[2],[48,1]);
+ const ev=E.finish(m,P,true);assert.equal(ev.kind,'owngoal');assert.equal(m.score.home,1);assert.equal(ev.goal.ownGoal,true);assert.equal(ev.goal.side,'home');});
+ok('Cartão vermelho: expulso sai e o time segue com 10 até o fim',()=>{const m=freshMatch(11);const t=m.teams.away;const p=t.players[3];E.applyCard(m,p,{card:'red',reason:'teste'},null);
+ assert.equal(E.onPitch(t).length,10);assert.equal(p.on,false);let guard=0;while(m.phase!=='fulltime'&&guard++<9999){if(m.phase==='halftime'){E.startSecondHalf(m);continue;}const ev=E.advance(m,99999);
+  if(ev){assert.ok(!ev.lineup.away.includes(p.id),'expulso não aparece nos lances seguintes');for(const b of ev.beats)for(const k of ['by','to','on','vs','att','def'])if(b[k])assert.notEqual(b[k].id,p.id);}}
+ assert.ok(E.onPitch(t).length<=10);});
+ok('Segundo amarelo pelo motor expulsa o jogador',()=>{const m=freshMatch(13);const p=m.teams.home.players[5];E.applyCard(m,p,R.foulCard({severity:'reckless'}),null);assert.equal(p.yellow,1);assert.ok(p.on);E.applyCard(m,p,R.foulCard({severity:'reckless',existingYellows:p.yellow}),null);assert.equal(p.red,true);assert.equal(p.on,false);});
+ok('Pênalti defendido mantém placar; lance registra defesa do goleiro',()=>{for(let s=1;s<500;s++){const m=freshMatch(s);const P=new E.Play(m,m.teams.home,m.teams.away,'penalty');P.start(m.teams.home.players[9],[43,0]);const o=E.penaltyKick(P);if(o==='save'){assert.equal(m.score.home,0);assert.equal(m.stats.away.saves,1);return;}}assert.fail('nenhuma defesa');});
+ok('Partida com semente fixa é reproduzível',()=>{const a=E.simulateFull(clubs[2],clubs[3],{seed:'4242'}),b=E.simulateFull(clubs[2],clubs[3],{seed:'4242'});
+ same(a.m.score,b.m.score);assert.equal(a.events.length,b.events.length);same(a.events.map(e=>e.kind+e.clock),b.events.map(e=>e.kind+e.clock));});
+ok('Relógio: 0:00, intervalo após 45+acréscimos, 2º tempo a partir de 45:00, fim após 90+acréscimos',()=>{const m=freshMatch(21);assert.equal(m.clock,0);let sawHalf=false;let g=0;
+ while(m.phase==='first'&&g++<999)E.advance(m,99999);assert.equal(m.phase,'halftime');assert.ok(m.clock>=2700+m.added.first-1e-6);sawHalf=true;E.startSecondHalf(m);assert.equal(m.clock,2700);
+ while(m.phase==='second'&&g++<9999)E.advance(m,99999);assert.equal(m.phase,'fulltime');assert.ok(m.clock>=5400+m.added.second-1e-6);assert.ok(sawHalf);});
+ok('Lances surgem em ordem cronológica e não antes do relógio',()=>{const m=freshMatch(31);let last=-1;let g=0;while(m.phase!=='fulltime'&&g++<9999){if(m.phase==='halftime'){E.startSecondHalf(m);continue;}const ev=E.advance(m,m.clock+120);if(ev){assert.ok(ev.clock>=last);assert.ok(ev.clock<=m.clock+1e-6);last=ev.clock;}}});
+console.log(`RULES TEST PASS (${n} verificações)`);
