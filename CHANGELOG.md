@@ -5,6 +5,21 @@ O formato segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e 
 
 ## [Não lançado]
 
+### Corrigido
+- **Bola atravessava a trave e o travessão.** A colisão só era vista se a bola parasse a menos de 17 cm antes do centro da trave, e acima de ~10 m/s ela pulava essa faixa num passo: a 29 m/s, 38 de 60 chutes no meio da trave atravessavam. Agora a bola anda em subpassos de no máximo 8 cm.
+- **Atletas atravessavam uns aos outros.** Agora têm corpo (raio de 0,3 m): o choque é inelástico e quem tem mais força e equilíbrio (ou está protegendo a bola) cede menos.
+- **Gol decidido pela posição errada:** a regra usava onde a bola estava no fim do passo, não onde cruzou a linha. Uma bola rápida que entrava rente à trave podia ser tiro de meta.
+
+### Alterado
+- **Efeito na bola segue a força de Magnus:** a curva cresce com a velocidade (bola lenta curva menos) e não cria velocidade. Chute forte ganha topspin (cai), cavadinha ganha backspin (flutua), e a mira já conta com isso.
+- **Correr de lado ou de costas é mais lento** (~85% e 58% da velocidade máxima). Quem precisa correr forte para longe de onde está olhando vira e corre.
+- **IA e goleiro preveem a bola com a mesma física do jogo** (arrasto, efeito e quique), em vez de uma conta própria e simplificada.
+- Constantes de física reunidas em `MD.World.PHYS`, com unidades.
+- Em 8 partidas de IA x IA (10 min, mesmas sementes): gols por jogo de 3,6 para 2,8, bolas na trave de 0,6 para 0,8, atletas sobrepostos de 0,09 para 0. O acerto de passes foi de 64% para 61%; o modelo de passe é o próximo passo.
+
+### Adicionado
+- `tests/physics.test.cjs`: queda livre, rolagem contra o modelo analítico, curva, topspin, trave e travessão de 10 a 35 m/s em todas as fases de chegada, linha do gol, corpos, velocidade de costas e determinismo.
+
 ## [0.7.0] - 2026-11-19 — Controle no celular separado
 
 O controle no celular virou um repositório próprio, lançado junto na mesma versão: [trs-mobile-device-management v0.7.0](https://github.com/Traficas-Revolution-Soccer/trs-mobile-device-management/releases/tag/v0.7.0).

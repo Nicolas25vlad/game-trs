@@ -22,9 +22,10 @@ class AI{
   if(w.pens&&w.phase==='play')w.shootoutStep();
   if(w.pens&&w.phase==='restart'&&w.shootoutWait&&w.time>w.shootoutWait){w.shootoutWait=0;w.nextPenalty();}}
  /* ---------- previsão da bola (para interceptar e disputar) ---------- */
- predict(){const w=this.w;if(this.predT===w.time)return this.pred;this.predT=w.time;const b=w.ball;const out=[];let x=b.x,y=b.y,z=b.z,vx=b.vx,vy=b.vy,vz=b.vz;
+ predict(){const w=this.w;if(this.predT===w.time)return this.pred;this.predT=w.time;const b=w.ball;const out=[];
   if(b.owner){const o=b.owner;for(let k=0;k<=20;k++)out.push({t:k*.15,x:o.x+o.vx*k*.15,y:.11,z:o.z+o.vz*k*.15});this.pred=out;return out;}
-  const dt=.05;for(let k=0;k<=70;k++){if(k%3===0)out.push({t:k*dt,x,y,z});if(y>.12||vy>0){vy-=9.81*dt;x+=vx*dt;y+=vy*dt;z+=vz*dt;if(y<.11){y=.11;vy=vy<-1.4?-vy*.5:0;vx*=.86;vz*=.86;}}else{const s=hyp(vx,vz);if(s>0){const ns=Math.max(0,s-(2.35+.035*s)*dt);vx*=ns/s;vz*=ns/s;}x+=vx*dt;z+=vz*dt;}}
+  /* mesma física da bola do mundo (arrasto, efeito, quique), em passos de 1/60 s */
+  const s=w.ballCopy(),dt=1/60;for(let k=0;k<=210;k++){if(k%9===0)out.push({t:k*dt,x:s.x,y:s.y,z:s.z});w.ballIntegrate(dt,s);}
   this.pred=out;return out;}
  /* tempo para um atleta alcançar a bola e o ponto */
  intercept(p,maxH){const w=this.w,pr=this.predict();const S=w.speeds(p);const react=p.human?0:this.diff(p.team).react*.6;
@@ -169,8 +170,8 @@ class AI{
  keeperReact(g){const w=this.w,b=w.ball,now=w.time,ti=g.team;const k=b.lastKick;if(!k||!k.shot||k.team===ti||b.owner||w.save&&w.save.gk===g&&!w.save.done)return;if(g.ai.plannedFor===k)return;
   const D=this.diff(ti);const react=(.09+(1-g.a.gkReflexes)*.16)*(g.human?1:(2-D.gk));if(now-k.t<react)return;g.ai.plannedFor=k;
   const gx=w.ownGoalX(ti);if(Math.sign(b.vx)!==Math.sign(gx)&&Math.abs(b.vx)>.5)return;
-  /* ponto em que a bola cruza o plano do goleiro */const px=g.x;let t=0,x=b.x,y=b.y,z=b.z,vx=b.vx,vy=b.vy,vz=b.vz;const dt=1/120;let hit=null;
-  for(let i=0;i<360;i++){x+=vx*dt;y+=vy*dt;z+=vz*dt;if(y>.11||vy>0)vy-=9.81*dt;if(y<.11){y=.11;vy=-vy*.5;}t+=dt;if((x-px)*Math.sign(gx)>=0){hit={t,y,z};break;}}
+  /* ponto em que a bola cruza o plano do goleiro, com a mesma física do mundo (efeito e topspin incluídos) */const px=g.x;const s=w.ballCopy(),dt=1/120;let t=0,hit=null;
+  for(let i=0;i<360;i++){w.ballIntegrate(dt,s);t+=dt;if((s.x-px)*Math.sign(gx)>=0){hit={t,y:s.y,z:s.z};break;}}
   if(!hit)return;const P=w.P;const onTarget=Math.abs(hit.z)<P.goalHalfW+.25&&hit.y<P.goalH+.15;if(!onTarget&&Math.abs(hit.z-g.z)>1.2)return;
   const dz=hit.z-g.z;const tAvail=Math.max(0,hit.t-.06);const reach=Math.min(3,.85+Math.max(0,tAvail-.1)*(5.2+g.a.agility*1.6));const hreach=2+g.a.jumping*.5;
   const sp=hyp(b.vx,b.vy,b.vz);let ok=false;

@@ -50,7 +50,8 @@ Depois abra o `index.html` no navegador. Não tem etapa de build.
 
 ### Partida
 - **Mundo contínuo e autoritativo** (`js/football/world.js`): passo fixo de 1/60 s, interpolação no desenho e semente reproduzível. A mesma semente gera o mesmo jogo.
-- **Física de bola:** gravidade, arrasto, quique, efeito, traves, travessão e rede. O gol só vale com a bola inteira além da linha.
+- **Física de bola:** gravidade, arrasto, quique, efeito lateral e vertical (Magnus), traves, travessão e rede, em subpassos para nenhum chute atravessar a trave. O gol só vale com a bola inteira além da linha.
+- **Corpos:** atletas não se atravessam; no choque, força e equilíbrio decidem quem cede.
 - **Ações:** passes rasteiro, em profundidade, alto, cruzamento e longo; chutes com barra de força; cabeceio, desarme, carrinho, proteção e **12 dribles**.
 - **Regras em tempo real:** lateral, escanteio, tiro de meta, impedimento no momento do passe, faltas com vantagem, cartões, pênalti, tiros livres, acréscimos, prorrogação e disputa de pênaltis em campo.
 - **Durações reais** de 4 a 90 minutos, com replay de 14 s, pausa, intervalo e pós-jogo com notas.
@@ -167,6 +168,7 @@ npm run build:catalog    # regera data/catalog_br_2026.* a partir das fontes
 | Teste | O que cobre |
 |---|---|
 | `world.test.cjs` | Mundo jogável com um "humano" enviando comandos: movimento, passes, chutes, desarmes, reinícios, impedimento, pênalti, cartões, intervalo, determinismo, replay, Germinare e dificuldade |
+| `physics.test.cjs` | Física: queda, rolagem, curva, topspin, trave e travessão a até 35 m/s, linha do gol, corpos dos atletas, velocidade de costas e determinismo |
 | `input.test.cjs` | Celular como dispositivo de entrada: toques curtos entre dois quadros não se perdem |
 | `rules.test.cjs` | Leis do jogo: faltas, impedimento, cartões, saídas de bola |
 | `tournament.test.cjs` | Modo Copa: formatos, folgas, grupos, desempate em campo |
