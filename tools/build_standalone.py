@@ -1,11 +1,11 @@
-"""Gera TRS26_v0.6_OFFLINE.html: um único arquivo com CSS, todos os scripts e as imagens do TRS26 embutidos
+"""Gera TRS26_OFFLINE.html: um único arquivo com CSS, todos os scripts e as imagens do TRS26 embutidos
 (data: URI). Abre direto com duplo clique, sem servidor e sem internet.
 Limitação por desenho: o controle virtual no celular precisa do servidor do repo trs-mobile-device-management e de um
 endereço http://; no arquivo único os scripts de mobile/ ficam de fora e a tela mostra a instrução para iniciar o servidor.
 Uso: python3 tools/build_standalone.py [saida.html]"""
 import base64, re, sys, pathlib
 ROOT = pathlib.Path(__file__).resolve().parents[1]
-out = pathlib.Path(sys.argv[1]) if len(sys.argv) > 1 else ROOT.parent / 'TRS26_v0.6_OFFLINE.html'
+out = pathlib.Path(sys.argv[1]) if len(sys.argv) > 1 else ROOT.parent / 'TRS26_OFFLINE.html'
 MIME = {'.webp': 'image/webp', '.png': 'image/png', '.jpg': 'image/jpeg', '.svg': 'image/svg+xml'}
 _cache = {}
 def data_uri(rel):

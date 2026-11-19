@@ -1,0 +1,38 @@
+{
+  "name": "game-trs",
+  "version": "0.7.0",
+  "description": "Traficas Revolution Soccer (TRS26): jogo de futebol 3D no navegador, com física, IA, regras completas, Modo Copa e Germinare. JavaScript puro, sem dependências e sem build.",
+  "keywords": [
+    "football-game",
+    "soccer-game",
+    "browser-game",
+    "webgl",
+    "html5-game",
+    "game-ai",
+    "gamepad",
+    "local-multiplayer",
+    "vanilla-javascript",
+    "zero-dependencies"
+  ],
+  "homepage": "https://github.com/Traficas-Revolution-Soccer/game-trs#readme",
+  "bugs": {
+    "url": "https://github.com/Traficas-Revolution-Soccer/game-trs/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Traficas-Revolution-Soccer/game-trs.git"
+  },
+  "license": "MIT",
+  "author": "Traficas Revolution Soccer",
+  "scripts": {
+    "test": "node tests/run.cjs",
+    "test:rapido": "node tests/run.cjs --rapido",
+    "test:e2e": "python tests/e2e_test.py",
+    "build:offline": "python tools/build_standalone.py",
+    "build:catalog": "node tools/build_catalog.cjs"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "private": true
+}

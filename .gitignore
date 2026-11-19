@@ -11,3 +11,11 @@ node_modules/
 coverage/
 .DS_Store
 Thumbs.db
+# gerados
+TRS26_OFFLINE.html
+tests/e2e_shots/
+__pycache__/
+# configuração local de ferramentas
+.claude/
+.vscode/
+.idea/
