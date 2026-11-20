@@ -84,6 +84,20 @@ console.log('Movimento:');
 {const w=newWorld(7);const p=w.teams[0].players[6];const want={vx:-12,vz:0};Object.assign(p,{x:0,z:0,vx:0,vz:0,f:0,down:0,lock:0});
  p.ai.want=want;p.ai.face=0;w.movePlayer(p);ok(want.vx===-12,'os limites de velocidade não alteram a intenção guardada pela IA');}
 
+console.log('Voo dos passes:');
+{/* passe rasteiro: a bola real (subpassos) chega à distância pedida com a velocidade e no tempo do modelo */
+ const w=newWorld(8);for(const d of [8,20,35]){const g=w.groundPass('ground',d);const b=put(w,{x:-40,y:BR,z:0,vx:g.v0});let t=0;
+  while(b.x+40<d&&t<10){w.ballStep();t+=DT;}
+  ok(Math.abs(t-g.T)<.05&&Math.abs(b.vx-g.ve)<.25,`passe rasteiro de ${d} m: chega em ${t.toFixed(2)} s (modelo ${g.T.toFixed(2)} s) a ${b.vx.toFixed(1)} m/s (modelo ${g.ve.toFixed(1)})`);}
+ const g=w.groundPass('ground',20);ok(Math.abs(w.rollTimeTo(g.v0,20)-g.T)<1e-3&&w.rollTimeTo(g.v0,10)<g.T/2,'tempo até metade do caminho é menor que metade do total (a bola desacelera)');
+ ok(w.rollTimeTo(5,100)===Infinity,'bola lenta demais para chegar: tempo infinito');}
+{/* passe alto: cai no alvo mesmo com arrasto e efeito (a força e a direção compensam) */
+ const w=newWorld(9);for(const [d,spin] of [[25,0],[40,0],[30,2]]){const T=w.loftTime('long',d),L=w.loftFor(-30,BR,0,-30+d,0,T,spin);
+  const b=put(w,{x:-30,y:BR,z:0,vx:Math.cos(L.ang)*L.vh,vz:Math.sin(L.ang)*L.vh,vy:L.vy,spin});
+  /* primeiro quique: a velocidade vertical vira de negativa para positiva (ou zera) dentro do passo */
+  let t=0;while(t<5){const vy0=b.vy;w.ballStep();t+=DT;if(vy0<0&&b.vy>=0)break;}
+  ok(Math.hypot(b.x-(-30+d),b.z)<.6&&Math.abs(t-T)<.2,`passe alto de ${d} m${spin?' com efeito':''}: cai a ${Math.hypot(b.x-(-30+d),b.z).toFixed(2)} m do alvo em ${t.toFixed(2)} s (planejado ${T.toFixed(2)} s)`);}}
+
 console.log('Determinismo:');
 {const sim=()=>{const w=newWorld(42);for(let i=0;i<60*60;i++){w.step();if(w.phase==='break')w.resume();}return JSON.stringify([w.score,w.ball.x.toFixed(6),w.ball.z.toFixed(6),w.stats[0].passes]);};
  ok(sim()===sim(),'mesma semente, mesmo minuto de jogo bit a bit');}

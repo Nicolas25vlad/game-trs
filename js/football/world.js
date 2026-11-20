@@ -198,6 +198,8 @@ class World{
   /* movimento */
   let sp=mag<.08?0:(c.sprint?S.sprint:S.run*clamp(mag*1.1,.35,1));if(c.shield&&hasBall)sp=Math.min(sp,2.2);
   let want={vx:mag>.08?mx/mag*sp:0,vz:mag>.08?mz/mag*sp:0};
+  /* recepção assistida: sem direcional, quem vai receber o passe corre ao ponto em que alcança a bola (como a IA faria) */
+  if(mag<.08&&!hasBall&&this.ai&&this.ballIncoming(P)){const ip=this.ai.intercept(P);const dx=ip.x-P.x,dz=ip.z-P.z,d=hyp(dx,dz);if(d>.3){const v=Math.min(S.run,d*3);want={vx:dx/d*v,vz:dz/d*v};}}
   /* pressão contextual (segurar): aproxima do portador mantendo distância de bote */
   if(!hasBall&&c.press&&b.owner&&b.owner.team!==P.team){const o=b.owner;const gx=this.ownGoalX(P.team);const a=Math.atan2(-o.z,gx-o.x);const tx=o.x+Math.cos(a)*1.25,tz=o.z+Math.sin(a)*1.25;const dx=tx-P.x,dz=tz-P.z,d=hyp(dx,dz);const v=Math.min(c.sprint?S.sprint:S.run,d*3);want={vx:dx/(d||1)*v,vz:dz/(d||1)*v};P.ai.face=Math.atan2(o.z-P.z,o.x-P.x);}else P.ai.face=null;
   P.ai.want=want;

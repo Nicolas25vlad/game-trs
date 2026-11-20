@@ -30,7 +30,9 @@ node tests/run.cjs world input   # só os conjuntos cujo nome contém "world" ou
 
 Todo comportamento novo precisa de teste:
 - **Física da bola e dos corpos:** `tests/physics.test.cjs`. As constantes ficam em `MD.World.PHYS`, com unidades.
+- **Engine (passe, reação, saída de bola, recepção):** `tests/engine.test.cjs`.
 - **IA e regras em campo:** `tests/world.test.cjs`.
+- **Onde mexer:** `js/football/world.js` é o núcleo; física em `physics.js`, ações com a bola em `actions.js`, arbitragem em `referee.js` e bola parada em `restarts.js`. Esses arquivos acrescentam métodos à classe com `W.extend` e são carregados depois de `world.js`.
 - **Entrada:** `tests/input.test.cjs`.
 - **Leis do jogo e motor estatístico:** `tests/rules.test.cjs`, `tests/montecarlo.test.cjs`.
 - **Copa, Germinare, catálogo:** o teste com o nome correspondente.

@@ -9,7 +9,11 @@ W.extend({
  contacts(){const b=this.ball,now=this.time;if(b.owner||b.frozen)return;if(this.restart)return;
   let best=null,bd=1e9;const all=this.all();
   const k=b.lastKick;const shotLive=k&&k.shot&&now-k.t<2.2&&b.lastTeam===k.team;
-  for(const p of all){if(p.off||p.down>now||p.touchCool>now)continue;if(p.gk&&shotLive&&k.team!==p.team&&!(this.save&&this.save.gk===p&&this.save.ok))continue;if(p.lock>now&&!(p.act&&p.act.clip==='slide'))continue;
+  const it=this.intended;
+  for(const p of all){if(p.off||p.down>now||p.touchCool>now)continue;
+   /* tempo de reação ao passe: logo depois dele, só o receptor esperado ou quem está com o corpo no caminho toca na bola.
+      No chute não: quem marca o atacante antecipa pelo movimento da perna e pode bloquear. */
+   if(k&&!k.shot&&p.id!==k.by&&!(it&&it.to===p)&&now-k.t<this.reactTime(p)&&!(hyp(b.x-p.x,b.z-p.z)<PHYS.BODY_R+BR&&b.y<1.9))continue;if(p.gk&&shotLive&&k.team!==p.team&&!(this.save&&this.save.gk===p&&this.save.ok))continue;if(p.lock>now&&!(p.act&&p.act.clip==='slide'))continue;
    const fx=p.x+Math.cos(p.f)*.28,fz=p.z+Math.sin(p.f)*.28;const d=hyp(b.x-fx,b.z-fz);const reach=.62+p.a.agility*.25+(p.gk&&this.inOwnBox(p,b.x,b.z)?.55:0);
    const hmax=p.gk&&this.inOwnBox(p,b.x,b.z)?2.35:(p.pending&&/header|shot|volley|bicycle/.test(p.pending.kind)?2.3:.95);
    if(d<reach&&b.y<hmax&&d<bd){bd=d;best=p;}}
@@ -32,8 +36,10 @@ W.extend({
   if(rv>lim&&this.rnd()<clamp((rv-lim)/10,0,.85)){const k=.35+this.rnd()*.3;b.vx=b.vx*-.25+p.vx*.6+(this.rnd()-.5)*4;b.vz=b.vz*-.25+p.vz*.6+(this.rnd()-.5)*4;b.vy=Math.max(0,b.vy*-.2)+this.rnd()*1.2;b.vx*=k+.5;b.vz*=k+.5;
    this.setLast(p);p.touchCool=now+.3;this.fxAdd('touch',{});return;}
   /* disputa com adversário próximo: força e equilíbrio */
-  const rival=this.nearest(this.opp(p.team),b.x,b.z);if(rival&&rival.p.down<=now&&rival.d<.9&&rival.p.lock<=now&&!p.gk){const sp=p.a.strength*.5+p.a.balance*.3+p.a.ballControl*.2,sr=rival.p.a.strength*.5+rival.p.a.balance*.3+rival.p.a.tackling*.2;
-   if(this.rnd()<.5+(sr-sp)*.8-.1){this.gain(rival.p,'duel');return;}}
+  const rival=this.nearest(this.opp(p.team),b.x,b.z);if(rival&&rival.p.down<=now&&rival.d<.9&&rival.p.lock<=now&&!p.gk){const r=rival.p,sp=p.a.strength*.5+p.a.balance*.3+p.a.ballControl*.2,sr=r.a.strength*.5+r.a.balance*.3+r.a.tackling*.2;
+   /* disputa: quem está mais perto da bola e de frente para ela leva vantagem; força e equilíbrio decidem o resto */
+   const geo=clamp((hyp(b.x-p.x,b.z-p.z)-rival.d)*1.2,-.35,.35)-(Math.abs(angDiff(Math.atan2(b.z-r.z,b.x-r.x),r.f))>1.6?.2:0);
+   if(this.rnd()<clamp(.4+geo+(sr-sp)*.6,.05,.9)){this.gain(r,'duel');return;}}
   this.gain(p,rv>6?'receive':'touch');},
  gain(p,how){const b=this.ball,now=this.time,prevTeam=b.lastTeam,prev=b.last;b.owner=p;b.spin=0;b.topspin=0;this.setLast(p);b.inNet=false;
   if(this.intended){const it=this.intended;if(it.team===p.team&&prev&&prev.team===p.team&&prev!==p){this.stats[p.team].passOk++;prev.st.passOk++;if(it.key)prev.st.keyPasses++;p.lastPassFrom=prev;p.lastPassT=now;}else if(it.team!==p.team){p.st.inter++;}this.intended=null;}
@@ -43,6 +49,8 @@ W.extend({
   if(this.advantage&&p.team!==this.advantage.offTeam&&now-this.advantage.t<2){this.advantage.kept=true;}
   /* humano: troca automática para quem recebe */
   for(const H of this.humans)if(H.ti===p.team&&H.autoSwitch&&!p.human&&!p.gk){const other=this.humans.find(x=>x!==H&&x.ti===H.ti);if(!other||other.player!==p)this.controlled(H,p);break;}},
+ /* tempo para reagir a uma bola chutada perto: 0,12 a 0,24 s pela agilidade (goleiro, pelos reflexos) */
+ reactTime(p){return p.gk?.1+(1-p.a.gkReflexes)*.1:.12+(1-p.a.agility)*.12;},
  setLast(p){const b=this.ball;b.last=p;b.lastTeam=p.team;b.lastTouchT=this.time;},
  nearest(ti,x,z,excl){let bp=null,bd=1e9;for(const p of this.teams[ti].players){if(p.off||p===excl)continue;const d=hyp(p.x-x,p.z-z);if(d<bd){bd=d;bp=p;}}return bp?{p:bp,d:bd}:null;},
  pressureOn(p){const n=this.nearest(this.opp(p.team),p.x,p.z);return n?clamp(1-(n.d-.8)/5,0,1):0;},
@@ -59,12 +67,16 @@ W.extend({
   const body=Math.abs(angDiff(Math.atan2(tz-b.z,tx-b.x),p.f));
   const skill=kind==='cross'?(p.a.passing*.6+p.a.vision*.1+.3*p.a.dribbling):p.a.passing*.75+p.a.vision*.25;
   let err=((1-skill)*.085+pressure*.05+clamp(body-.6,0,2)*.03+(o.first?.035:0)+(d>35?.02:0))*ex;if(o.throwIn)err*=.5;
-  const ang=Math.atan2(tz-b.z,tx-b.x)+this.gauss()*err;const lenErr=1+this.gauss()*err*.9;
-  let vh,vy=0,y0=o.throwIn?2.0:y0Hands&&o.kind==='ground'?1.2:BR;
-  if(kind==='ground'||kind==='through'){const ve=kind==='through'?2.8:5.6;vh=Math.sqrt(ve*ve+2*2.9*d*lenErr);if(o.power!==undefined&&!o.assistPower)vh*=lerp(.75,1.25,o.power);vh=Math.min(vh,28);}
-  else{const T=clamp((kind==='cross'?.75:.6)+d/(kind==='long'?24:21),.7,2.6);vh=d*lenErr/T*(1+.0065*d);vy=G*T/2-(y0-BR)/T;if(kind==='cross'&&o.low){vy*=.45;vh*=1.12;}}
+  const ang0=Math.atan2(tz-b.z,tx-b.x)+this.gauss()*err;const lenErr=1+this.gauss()*err*.9;
+  /* força e altura saem do mesmo modelo de voo da bola (physics.js): o passe chega onde e quando foi planejado;
+     o erro do passador (direção e distância) entra depois */
+  let vh,vy=0,ang=ang0,y0=o.throwIn?2.0:y0Hands&&o.kind==='ground'?1.2:BR;const spin=kind==='cross'?(this.gauss()*1.2+(o.curl||0)):0;
+  if(kind==='ground'||kind==='through'){/* a barra de força decide com que firmeza a bola chega; ela sempre alcança o alvo */
+   const firm=o.power!==undefined&&!o.assistPower?lerp(.7,1.3,o.power):1;vh=Math.min(28,this.groundPass(kind,d*lenErr,firm).v0);}
+  else{const T=this.loftTime(kind,d),ex0=b.x,ez0=b.z,L=this.loftFor(ex0,y0,ez0,ex0+Math.cos(ang0)*d*lenErr,ez0+Math.sin(ang0)*d*lenErr,T,spin);
+   vh=L.vh;vy=L.vy;ang+=angDiff(L.ang,ang0);if(kind==='cross'&&o.low){vy*=.45;vh*=1.12;}}
   if(o.throwIn){vh=Math.min(vh,o.long?17:13);}
-  b.owner=null;b.x=o.throwIn?b.x:b.x;b.y=y0;b.vx=Math.cos(ang)*vh;b.vz=Math.sin(ang)*vh;b.vy=vy;b.spin=(kind==='cross'?(this.gauss()*1.2+(o.curl||0)):0);b.topspin=0;this.setLast(p);b.lastKick={by:p.id,team:p.team,t:now,kind};
+  b.owner=null;b.x=o.throwIn?b.x:b.x;b.y=y0;b.vx=Math.cos(ang)*vh;b.vz=Math.sin(ang)*vh;b.vy=vy;b.spin=spin;b.topspin=0;this.setLast(p);b.lastKick={by:p.id,team:p.team,t:now,kind};
   p.touchCool=now+.28;p.lock=now+(o.throwIn?.6:.22);p.act={clip:o.throwIn?'throw_in':o.first?'pass_first':kind==='cross'?'cross':kind==='long'||kind==='lob'?'pass_long':'pass',t0:now,t1:now+(o.throwIn?.9:.55),p:{}};
   this.stats[p.team].passes++;p.st.passes++;this.intended={from:p,to,team:p.team,t:now,kind,x:tx,z:tz,key:to&&this.rel(p.team,tz)>0&&this.rel(p.team,tx)>this.P.L*.55};
   if(to){to.ai.recvT=now;to.ai.recvX=tx;to.ai.recvZ=tz;}
@@ -79,12 +91,16 @@ W.extend({
    const want=kind==='through'?24:kind==='cross'||kind==='long'||kind==='lob'?30:power!==undefined?8+power*30:14;
    const free=this.nearest(this.opp(p.team),q.x,q.z);let s=-a*16-Math.abs(d-want)*.35+(free?Math.min(free.d,6):6)*1.1+(q.gk?-14:0);
    if(kind==='cross')s+=this.inBox(this.teams[p.team].dir,q.x,q.z)?14:-8;
+   /* linha de passe: o mesmo risco de interceptação que a IA usa (tempo da bola × tempo de cada adversário) */
+   if(this.ai)s-=this.ai.laneRisk(p,q.x,q.z,kind,p.team)*12;
    if(s>bs){bs=s;best=q;}}
   if(!best&&assist&&!wide)return this.passTarget(p,dir,kind,assist,power,true);/* nada no cone: melhor companheiro disponível (ex.: saída de bola) */
   if(best&&assist){const lp=kind==='through'?this.leadPoint(p,best,kind):{x:best.x+best.vx*.35,z:best.z+best.vz*.35};return{to:best,x:lp.x,z:lp.z};}
   const dist=kind==='ground'?8+(power??.4)*30:kind==='through'?20+(power??.5)*18:18+(power??.5)*30;return{to:null,x:b.x+Math.cos(dir)*dist,z:b.z+Math.sin(dir)*dist};},
- leadPoint(p,q,kind){const b=this.ball;const d=hyp(q.x-b.x,q.z-b.z);const T=kind==='through'?.55+d/16:.4+d/20;const dirA=this.teams[q.team].dir;
-  let lx=q.x+q.vx*T*.9+(kind==='through'?dirA*Math.min(7,2.5+q.a.pace*5)*(this.small?.5:1):0),lz=q.z+q.vz*T*.9;const L=this.P.L,Wd=this.P.W;const lim=L-(this.small?2.5:7.5);if(dirA*lx>lim)lx=dirA*lim;return{x:clamp(lx,-L+1,L-1),z:clamp(lz,-Wd+1.5,Wd-1.5)};},
+ leadPoint(p,q,kind){const b=this.ball;const dirA=this.teams[q.team].dir;
+  /* tempo real de voo até onde o receptor vai estar (duas iterações: o ponto muda a distância, que muda o tempo) */
+  let T=this.passTime(kind,hyp(q.x-b.x,q.z-b.z));for(let i=0;i<2;i++)T=this.passTime(kind,hyp(q.x+q.vx*T*.6-b.x,q.z+q.vz*T*.6-b.z));
+  let lx=q.x+q.vx*T*.6+(kind==='through'?dirA*Math.min(7,2.5+q.a.pace*5)*(this.small?.5:1):0),lz=q.z+q.vz*T*.6;const L=this.P.L,Wd=this.P.W;const lim=L-(this.small?2.5:7.5);if(dirA*lx>lim)lx=dirA*lim;return{x:clamp(lx,-L+1,L-1),z:clamp(lz,-Wd+1.5,Wd-1.5)};},
  /* chute: aim {dirx,dirz} (ajuste lateral/altura), power 0..1, kind: shot|placed|low|chip|first */
  shoot(p,o){const b=this.ball,now=this.time;if(b.owner!==p&&!o.first&&!o.set)return false;const P=this.P;const ti=p.team,gx=this.goalX(ti),sgn=Math.sign(gx);
   let aimZ,aimY;const kind=o.kind==='shot'?'shot':o.kind||'shot';const power=clamp(o.power??.7,0,1);

@@ -73,7 +73,10 @@ class AI{
   if(w.phase==='goal'||w.phase==='fulltime'||w.phase==='break')return;
   if(w.phase==='restart'||w.phase==='kickoff'||w.phase==='dead'){if(w.restart&&w.restart.taker===p){p.ai.speed='run';return;}
    const st=p.ai.setTarget;if(st&&w.restart){p.ai.tx=st.x;p.ai.tz=st.z;p.ai.speed=hyp(st.x-p.x,st.z-p.z)>8?'run':'jog';return;}
-   const sh=this.shape(p);p.ai.tx=sh.x;p.ai.tz=sh.z;p.ai.speed='jog';return;}
+   const sh=this.shape(p);let sx=sh.x,sz=sh.z;
+   /* antes do chute inicial, a formação respeita a regra da saída (campo próprio e círculo central) */
+   if(w.phase==='kickoff'&&w.restart){const k=w.kickoffSpot(p,sx,sz,w.restart.team);sx=k.x;sz=k.z;}
+   p.ai.tx=sx;p.ai.tz=sz;p.ai.speed='jog';return;}
   if(b.owner===p)return;/* o portador é tratado em carrierStep */
   const sh=this.shape(p);let tx=sh.x,tz=sh.z,speed='jog';
   if(p.beaten>now){/* foi driblado: recupera a posição correndo */speed='sprint';}
@@ -121,7 +124,9 @@ class AI{
   for(const q of mates){if(q.gk&&(rel>-L*.2||pressure<.6))continue;const kinds=[];const d=hyp(q.x-p.x,q.z-p.z);if(d<4*sc||d>58*sc)continue;
    kinds.push(d<34*sc?'ground':'long');if((q.ai.run>w.time||(dir*q.x>this.offsideRel(ti)-3&&q.group!=='CB'))&&dir*q.x>dir*p.x)kinds.push('through');
    if(Math.abs(p.z)>Wd*.42&&rel>L*.45&&w.inBox(dir,q.x,q.z))kinds.push('cross');
-   for(const k of kinds){const tgt=k==='through'?w.leadPoint(p,q,'through'):{x:q.x+q.vx*.3,z:q.z+q.vz*.3};if(w.offsideOn&&k!=='cross'&&q.ai.run<=w.time&&dir*tgt.x>this.offsideRel(ti)+.2)continue;
+   /* impedimento vale pela posição do receptor na hora do passe (como o árbitro em snapOffside), não pelo alvo */
+   if(w.offsideOn&&dir*q.x>0&&dir*q.x>this.offsideRel(ti)+.15)continue;
+   for(const k of kinds){const tgt=k==='through'?w.leadPoint(p,q,'through'):{x:q.x+q.vx*.3,z:q.z+q.vz*.3};
     const risk=this.laneRisk(p,tgt.x,tgt.z,k,ti);let gain=V(tgt.x,tgt.z)-v0;let u=gain*1.15+.07-risk*(.55+(rel<0?.35:0))+noise();
     if(k==='long'&&st!=='direct')u-=.06;if(k==='through'&&!(q.ai.run>w.time))u-=.05;if(st==='possession'&&k==='ground')u+=.04;if(st==='direct'&&(k==='long'||k==='through'))u+=.05;if(st==='counter'&&k==='through')u+=.06;
     if(k==='cross')u+=.12+.04*mates.filter(m=>w.inBox(dir,m.x,m.z)).length;
@@ -141,8 +146,10 @@ class AI{
   if(o.k==='skill'){const names=['stepover','cut','bodyfeint','elastico','nutmeg','drag','turn','sombrero'];const pick=names[Math.floor(w.rnd()*(p.a.dribbling>.82?names.length:4))];w.skill(p,pick,Math.cos(bestA+(w.rnd()-.5)*1.6),Math.sin(bestA+(w.rnd()-.5)*1.6));p.ai.drib={dx:Math.cos(bestA),dz:Math.sin(bestA),speed:'run'};return;}
   if(o.k==='shield'){p.shield=w.time+.6;const a=nearO?Math.atan2(p.z-nearO.p.z,p.x-nearO.p.x):fwd;p.ai.drib={dx:Math.cos(a),dz:Math.sin(a),speed:'walk'};return;}
   p.ai.drib={dx:Math.cos(o.a),dz:Math.sin(o.a),speed:o.space>9&&p.stamina>.35?'sprint':'run'};}
- laneRisk(p,tx,tz,kind,ti){const w=this.w;const d=hyp(tx-p.x,tz-p.z);const v=kind==='ground'||kind==='through'?Math.max(10,Math.min(24,Math.sqrt(36+5.8*d))):d/(.7+d/21);let risk=0;
-  for(const q of w.onPitch(1-ti)){const proj=projSeg(q.x,q.z,p.x,p.z,tx,tz);if(kind!=='ground'&&kind!=='through'&&proj.u<.82)continue;const tb=d*proj.u/v*1.15;const reach=q.gk?1.6:.9;const to=Math.max(0,proj.d-reach)/6.8+(q.gk?.15:.25);
+ laneRisk(p,tx,tz,kind,ti){const w=this.w;const d=hyp(tx-p.x,tz-p.z);let risk=0;
+  /* quando a bola passa por cada ponto da linha: mesmo modelo de voo do passe (physics.js) */
+  const ground=kind==='ground'||kind==='through',gp=ground?w.groundPass(kind,d):null,T=ground?gp.T:w.loftTime(kind,d);
+  for(const q of w.onPitch(1-ti)){const proj=projSeg(q.x,q.z,p.x,p.z,tx,tz);if(kind!=='ground'&&kind!=='through'&&proj.u<.82)continue;const tb=(ground?w.rollTimeTo(gp.v0,d*proj.u):T*proj.u)*1.15;const reach=q.gk?1.6:.9;const to=Math.max(0,proj.d-reach)/6.8+(q.gk?.15:.25);
    const r=clamp((tb-to)*2.2+.25,0,1)*(q.beaten>w.time?.3:1);if(r>risk)risk=r;}
   const nr=w.nearest(1-ti,tx,tz);if(nr&&nr.d<2.5)risk=Math.min(1,risk+.18);return risk;}
  headerDecision(p){const w=this.w,ti=p.team,dir=w.teams[ti].dir;if(w.inBox(dir,p.x,p.z)||hyp(w.goalX(ti)-p.x,p.z)<16*this.sc){w.header(p,{kind:'shot'});return;}

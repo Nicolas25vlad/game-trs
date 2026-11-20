@@ -82,6 +82,34 @@ W.extend({
    for(const pz of [-gw,gw]){const dx=b.x-gx,dz=b.z-pz;const d=hyp(dx,dz);if(d<rp&&b.y<gh+.06){const nx=dx/d,nz=dz/d;const vn=b.vx*nx+b.vz*nz;if(vn<0){const e=1+PHYS.POST_RESTITUTION;b.vx-=e*vn*nx;b.vz-=e*vn*nz;b.x=gx+nx*rp;b.z=pz+nz*rp;this.fxAdd('post',{});this.event('post',{});}}}
    if(Math.abs(b.z)<gw){const dx=b.x-gx,dy=b.y-gh;const d=hyp(dx,dy);if(d<rp){const nx=dx/d,ny=dy/d;const vn=b.vx*nx+b.vy*ny;if(vn<0){const e=1+PHYS.POST_RESTITUTION;b.vx-=e*vn*nx;b.vy-=e*vn*ny;b.x=gx+nx*rp;b.y=gh+ny*rp;this.fxAdd('post',{bar:true});this.event('post',{bar:true});}}}
    /* rede: bola dentro do gol perde energia e fica contida */
-   if(s*b.x>L&&Math.abs(b.z)<gw+.2&&b.y<gh+.1&&b.inNet){const nd=P.netDepth||1.8;if(s*b.x>L+nd-BR){b.x=s*(L+nd-BR);b.vx*=-.15;b.vz*=.5;}if(Math.abs(b.z)>gw-BR){b.z=Math.sign(b.z)*(gw-BR);b.vz*=-.2;}if(b.y>gh-BR){b.y=gh-BR;b.vy*=-.1;}}}}
+   if(s*b.x>L&&Math.abs(b.z)<gw+.2&&b.y<gh+.1&&b.inNet){const nd=P.netDepth||1.8;if(s*b.x>L+nd-BR){b.x=s*(L+nd-BR);b.vx*=-.15;b.vz*=.5;}if(Math.abs(b.z)>gw-BR){b.z=Math.sign(b.z)*(gw-BR);b.vz*=-.2;}if(b.y>gh-BR){b.y=gh-BR;b.vy*=-.1;}}}},
+ /* ---------------- voo de passes: o mesmo modelo da bola, para quem passa e quem recebe ----------------
+    Rolagem: dv/dt = -(a + k·v), com a = ROLL_DEC e k = ROLL_DEC_V. Distância e tempo entre as velocidades v0 e v1 têm
+    forma fechada; a bola real anda em subpassos e fica ~0,3% aquém, o que não se vê em campo.
+    As inversas usam Newton (4–6 iterações): a IA chama isto para cada adversário de cada opção de passe. */
+ rollDist(v0,v1){const a=PHYS.ROLL_DEC,k=PHYS.ROLL_DEC_V;return(v0-v1)/k-(a/(k*k))*Math.log((a+k*v0)/(a+k*v1));},
+ rollTime(v0,v1){const a=PHYS.ROLL_DEC,k=PHYS.ROLL_DEC_V;return Math.log((a+k*v0)/(a+k*v1))/k;},
+ /* velocidade de saída para a bola rasteira chegar a d metros ainda com velocidade ve */
+ rollSpeedFor(d,ve){const a=PHYS.ROLL_DEC,k=PHYS.ROLL_DEC_V;let v=Math.sqrt(ve*ve+2*(a+k*ve)*d);/* d(dist)/dv0 = v0/(a+k·v0) */
+  for(let i=0;i<6;i++){const f=this.rollDist(v,ve)-d;v=Math.max(ve,v-f*(a+k*v)/v);if(Math.abs(f)<1e-4)break;}return v;},
+ /* tempo para a bola rasteira lançada a v0 percorrer s metros (Infinity se parar antes) */
+ rollTimeTo(v0,s){if(s<=0)return 0;const a=PHYS.ROLL_DEC,k=PHYS.ROLL_DEC_V,c=v0+a/k,tStop=Math.log(c*k/a)/k;
+  const x=t=>c*(1-Math.exp(-k*t))/k-a*t/k;if(x(tStop)<=s)return Infinity;
+  /* x(t) é côncava e crescente até parar: Newton a partir da esquerda converge sem passar da raiz */
+  let t=s/v0;for(let i=0;i<5;i++){const v=c*Math.exp(-k*t)-a/k;t=Math.min(tStop,t+(s-x(t))/Math.max(v,1e-3));}return t;},
+ /* passe rasteiro ou em profundidade: velocidade de saída, velocidade de chegada e tempo de voo até d metros.
+    A chegada cresce com a distância (passe longo vem mais firme); firm escala a chegada (barra de força do humano). */
+ groundPass(kind,d,firm){const ve=Math.max(1.5,(kind==='through'?clamp(2.5+.12*d,2.8,6):clamp(4+.25*d,5.6,11))*(firm||1)),v0=this.rollSpeedFor(d,ve);return{v0,ve,T:this.rollTime(v0,ve)};},
+ /* passe alto: tempo de voo escolhido pelo tipo (define a altura); a força sai de loftFor */
+ loftTime(kind,d){return clamp((kind==='cross'?.75:.6)+d/(kind==='long'?24:21),.7,2.6);},
+ /* tempo até a bola chegar a d metros, para antecipar o receptor e medir o risco de interceptação */
+ passTime(kind,d){return kind==='ground'||kind==='through'?this.groundPass(kind,d).T:this.loftTime(kind,d);},
+ /* passe alto: direção, velocidade horizontal e vertical para a bola sair de (x0,y0,z0) e quicar pela primeira vez
+    em (tx,tz) depois de ~T s. Voo simulado com ballIntegrate (arrasto e efeito incluídos) e corrigido 5 vezes. */
+ loftFor(x0,y0,z0,tx,tz,T,spin){const d=Math.max(1,hyp(tx-x0,tz-z0)),want=Math.atan2(tz-z0,tx-x0);let ang=want,vh=d/T,vy=G*T/2-(y0-BR)/T;const h=DT/2;
+  for(let it=0;it<5;it++){const s={x:x0,y:y0,z:z0,vx:Math.cos(ang)*vh,vy,vz:Math.sin(ang)*vh,spin:spin||0,topspin:0};let t=0;
+   for(let i=0;i<1200;i++){const air=s.y>BR+.005||s.vy>.05;this.ballIntegrate(h,s);t+=h;if(air&&s.y<=BR+1e-9)break;}
+   const ld=hyp(s.x-x0,s.z-z0)||1;vh*=d/ld;vy+=G*(T-t)/2;ang+=angDiff(want,Math.atan2(s.z-z0,s.x-x0));}
+  return{ang,vh,vy};}
 });
 })(typeof window!=='undefined'?(window.MD=window.MD||{}):(globalThis.MD=globalThis.MD||{}));

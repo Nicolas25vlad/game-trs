@@ -5,10 +5,13 @@
 const W=MD.World;const {U,D,clamp,lerp,PI,hyp,DT,G,BR,PHYS,n01,angDiff,goTo,emptyCmd}=W._k;
 W.extend({
  /* ---------------- reinícios ---------------- */
+ /* posição legal na saída de bola: cada um no próprio campo; quem não dá a saída fica fora do círculo central */
+ kickoffSpot(p,x,z,kickTeam){const t=this.teams[p.team],P=this.P;let rx=Math.min(t.dir*x,-.5);x=t.dir*rx;
+  if(p.team!==kickTeam){const R=(P.arcR||9.15)+.3,d=hyp(x,z);if(d<R){if(d<.01){x=t.dir*-R;z=0;}else{x*=R/d;z*=R/d;}}}return{x,z};},
  setupKickoff(ti,teleport){const P=this.P;const kd=this.teams[ti].dir;this.restart={type:'kickoff',team:ti,x:0,z:0,tx:-kd*.35,tz:0,face:kd>0?0:PI,ready:false,t:this.time};this.phase='kickoff';this.goalLock=0;
   const b=this.ball;b.x=0;b.z=0;b.y=BR;b.vx=b.vy=b.vz=0;b.owner=null;b.inNet=false;b.spin=0;b.topspin=0;b.last=null;b.lastTeam=-1;this.intended=null;this.offsideSnap=null;this.gkHolding=null;
   for(const t of this.teams){for(const p of t.players){if(p.off)continue;const s=t.slots[p.slot]||t.slots[0];let x=s.x*.92,z=s.z;if(x>-1.2)x=-1.2-((p.slot*37)%10)*.03;
-    const kx=t.dir*x,kz=t.dir*z;p.ai.tx=kx;p.ai.tz=kz;p.ai.want=null;p.lock=0;p.down=0;p.pending=null;p.sliding=null;if(teleport){p.x=p.px=kx;p.z=p.pz=kz;p.vx=p.vz=0;p.f=p.pf=t.dir>0?0:PI;}}}
+    const ko=this.kickoffSpot(p,t.dir*x,t.dir*z,ti),kx=ko.x,kz=ko.z;p.ai.tx=kx;p.ai.tz=kz;p.ai.want=null;p.lock=0;p.down=0;p.pending=null;p.sliding=null;if(teleport){p.x=p.px=kx;p.z=p.pz=kz;p.vx=p.vz=0;p.f=p.pf=t.dir>0?0:PI;}}}
   /* cobrador e apoio */const t=this.teams[ti];const fw=this.onPitch(ti).filter(p=>!p.gk).sort((a,c)=>Math.abs(a.x)+Math.abs(a.z)-Math.abs(c.x)-Math.abs(c.z));
   const tk=fw[0],sup=fw[1];if(tk){this.restart.taker=tk;tk.ai.tx=-t.dir*.35;tk.ai.tz=0;if(teleport){tk.x=tk.ai.tx;tk.z=0;}}if(sup){sup.ai.tx=-t.dir*1.6;sup.ai.tz=this.small?2:6;if(teleport){sup.x=sup.ai.tx;sup.z=sup.ai.tz;}}
   this.ref.x=this.ref.px=-6;this.ref.z=this.ref.pz=-8;
