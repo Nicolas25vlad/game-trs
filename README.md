@@ -138,7 +138,8 @@ game-trs/
 ├── index.html              # ponto de entrada: telas e ordem dos scripts
 ├── styles.css, css/        # estilos (identidade TRS26 em css/trs26.css)
 ├── js/
-│   ├── football/           # mundo contínuo (world.js) e IA (ai.js)
+│   ├── football/           # mundo contínuo: world.js (núcleo), physics.js, actions.js,
+│   │                       # referee.js, restarts.js, e a IA (ai.js)
 │   ├── input/input.js      # teclado, Gamepad API e celulares → um comando lógico
 │   ├── gfx/                # WebGL2 (renderer3d, personagens, estádio, câmeras) e Canvas 2D
 │   ├── ui/                 # telas: menu, partida, táticas, Copa, Germinare, editores
@@ -168,6 +169,7 @@ npm run build:catalog    # regera data/catalog_br_2026.* a partir das fontes
 | Teste | O que cobre |
 |---|---|
 | `world.test.cjs` | Mundo jogável com um "humano" enviando comandos: movimento, passes, chutes, desarmes, reinícios, impedimento, pênalti, cartões, intervalo, determinismo, replay, Germinare e dificuldade |
+| `engine.test.cjs` | Engine: cada partida com o próprio campo, reação ao passe, saída de bola dentro da regra e recepção assistida |
 | `physics.test.cjs` | Física: queda, rolagem, curva, topspin, trave e travessão a até 35 m/s, linha do gol, corpos dos atletas, velocidade de costas e determinismo |
 | `input.test.cjs` | Celular como dispositivo de entrada: toques curtos entre dois quadros não se perdem |
 | `rules.test.cjs` | Leis do jogo: faltas, impedimento, cartões, saídas de bola |

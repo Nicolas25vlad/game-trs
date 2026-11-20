@@ -5,7 +5,21 @@ O formato segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e 
 
 ## [Não lançado]
 
+### Engine (fase 2)
+- **Passe calculado pela física da bola.** A força do passe rasteiro sai da fórmula exata da rolagem (atrito 2,35 + 0,035·v) e a do passe alto vem do voo simulado com arrasto e efeito: a bola cai a menos de 25 cm do alvo. Passes longos chegam mais firmes. A antecipação do receptor usa o tempo real de voo.
+- **Barra de força decide a firmeza com que a bola chega**, não a velocidade de saída: um toque curto não deixa mais o passe fraco e sem alcançar o companheiro.
+- **Tempo de reação ao passe:** logo depois do passe (0,12 a 0,24 s, pela agilidade), só o receptor ou quem está com o corpo no caminho toca na bola. Antes, qualquer adversário a ~0,8 m ficava com ela na hora. Chutes continuam podendo ser bloqueados: quem marca antecipa.
+- **Disputa pelo domínio** considera quem está mais perto da bola e de frente para ela, além de força e equilíbrio.
+- **Recepção assistida:** sem direcional, o jogador humano que vai receber o passe corre de encontro à bola (antes ficava parado).
+- **Assistência de passe do humano** evita linhas de passe bloqueadas, com o mesmo cálculo de risco da IA.
+- **IA estima a interceptação com o modelo de voo do passe**, em vez de uma velocidade fixa.
+- **Cada partida tem o próprio campo e as próprias regras**, em vez de apontar para o objeto global que outro jogo podia trocar.
+- `world.js` dividido em `world.js` (núcleo), `physics.js`, `actions.js`, `referee.js` e `restarts.js`, sem ES modules. A divisão foi conferida bit a bit em 5 partidas completas.
+- Em 24 partidas de IA x IA: acerto de passes de 60,6% para 69,3%, impedimentos de 3,5 para 1,0 por jogo, passes em profundidade certos de 33% para 90%. Gols iguais (3,5). A IA passa menos (92 contra 110 por jogo), o que fica para a calibração da fase 3. A simulação custa ~24% a mais (193 µs por passo, 1,2% de um quadro).
+
 ### Corrigido
+- **Saída de bola fora da regra:** o centroavante adversário começava a 1,3 m da bola e, antes do chute, a IA andava para dentro do campo de quem dava a saída. Agora cada um fica no próprio campo e quem não dá a saída fica fora do círculo central (9,15 m; 3 m no Germinare).
+- **IA passava para quem já estava impedido** quando ele estava "fazendo uma corrida": olhava o alvo do passe, não a posição do receptor na hora do passe. Passes em profundidade que viravam impedimento caíram de 30% para quase nenhum.
 - **Bola atravessava a trave e o travessão.** A colisão só era vista se a bola parasse a menos de 17 cm antes do centro da trave, e acima de ~10 m/s ela pulava essa faixa num passo: a 29 m/s, 38 de 60 chutes no meio da trave atravessavam. Agora a bola anda em subpassos de no máximo 8 cm.
 - **Atletas atravessavam uns aos outros.** Agora têm corpo (raio de 0,3 m): o choque é inelástico e quem tem mais força e equilíbrio (ou está protegendo a bola) cede menos.
 - **Gol decidido pela posição errada:** a regra usava onde a bola estava no fim do passo, não onde cruzou a linha. Uma bola rápida que entrava rente à trave podia ser tiro de meta.
@@ -18,7 +32,8 @@ O formato segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e 
 - Em 8 partidas de IA x IA (10 min, mesmas sementes): gols por jogo de 3,6 para 2,8, bolas na trave de 0,6 para 0,8, atletas sobrepostos de 0,09 para 0. O acerto de passes foi de 64% para 61%; o modelo de passe é o próximo passo.
 
 ### Adicionado
-- `tests/physics.test.cjs`: queda livre, rolagem contra o modelo analítico, curva, topspin, trave e travessão de 10 a 35 m/s em todas as fases de chegada, linha do gol, corpos, velocidade de costas e determinismo.
+- `tests/physics.test.cjs`: queda livre, rolagem contra o modelo analítico, curva, topspin, trave e travessão de 10 a 35 m/s em todas as fases de chegada, linha do gol, corpos, velocidade de costas, voo dos passes e determinismo.
+- `tests/engine.test.cjs`: partidas isoladas, reação ao passe, saída de bola dentro da regra e recepção assistida.
 
 ## [0.7.0] - 2026-11-19 — Controle no celular separado
 
